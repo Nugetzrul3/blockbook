@@ -38,7 +38,6 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/namecoin"
 	"github.com/trezor/blockbook/bchain/coins/nuls"
 	"github.com/trezor/blockbook/bchain/coins/omotenashicoin"
-	"github.com/trezor/blockbook/bchain/coins/pivx"
 	"github.com/trezor/blockbook/bchain/coins/kts"
 	"github.com/trezor/blockbook/bchain/coins/fls"
 	"github.com/trezor/blockbook/bchain/coins/polis"
