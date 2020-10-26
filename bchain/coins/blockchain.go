@@ -99,7 +99,7 @@ func init() {
 	BlockChainFactories["KTS"] = kts.NewPivXRPC
 	BlockChainFactories["FLS"] = fls.NewPivXRPC
 	BlockChainFactories["RPD"] = rpd.NewPivXRPC
-	BlockChainFactories["SIN"] = sin.NewPivXRPC
+	BlockChainFactories["SIN"] = sin.NewDashRPC
 	BlockChainFactories["Polis"] = polis.NewPolisRPC
 	BlockChainFactories["Zcoin"] = xzc.NewZcoinRPC
 	BlockChainFactories["Fujicoin"] = fujicoin.NewFujicoinRPC
