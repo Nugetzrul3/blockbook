@@ -40,6 +40,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/nuls"
 	"github.com/trezor/blockbook/bchain/coins/omotenashicoin"
 	"github.com/trezor/blockbook/bchain/coins/kts"
+	"github.com/trezor/blockbook/bchain/coins/rpd"
 	"github.com/trezor/blockbook/bchain/coins/fls"
 	"github.com/trezor/blockbook/bchain/coins/polis"
 	"github.com/trezor/blockbook/bchain/coins/qtum"
@@ -96,6 +97,7 @@ func init() {
 	BlockChainFactories["Groestlcoin Testnet"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["KTS"] = kts.NewPivXRPC
 	BlockChainFactories["FLS"] = fls.NewPivXRPC
+	BlockChainFactories["RPD"] = rpd.NewPivXRPC
 	BlockChainFactories["Polis"] = polis.NewPolisRPC
 	BlockChainFactories["Zcoin"] = xzc.NewZcoinRPC
 	BlockChainFactories["Fujicoin"] = fujicoin.NewFujicoinRPC
