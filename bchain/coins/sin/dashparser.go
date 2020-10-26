@@ -9,7 +9,7 @@ import (
 
 const (
 	// MainnetMagic is mainnet network constant
-	MainnetMagic wire.BitcoinNet = 0x06734451
+	MainnetMagic wire.BitcoinNet = 0xf8ddd4b8
 	// TestnetMagic is testnet network constant
 	TestnetMagic wire.BitcoinNet = 0xffcae2ce
 	// RegtestMagic is regtest network constant
@@ -30,8 +30,8 @@ func init() {
 	MainNetParams.Net = MainnetMagic
 
 	// Address encoding magics
-	MainNetParams.PubKeyHashAddrID = []byte{125} // base58 prefix: X
-	MainNetParams.ScriptHashAddrID = []byte{117} // base58 prefix: 7
+	MainNetParams.PubKeyHashAddrID = []byte{63} // base58 prefix: X
+	MainNetParams.ScriptHashAddrID = []byte{5} // base58 prefix: 7
 
 	TestNetParams = chaincfg.TestNet3Params
 	TestNetParams.Net = TestnetMagic
