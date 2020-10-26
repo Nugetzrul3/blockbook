@@ -67,6 +67,7 @@ func NewDashParser(params *chaincfg.Params, c *btc.Configuration) *DashParser {
 // the simulation test Dash network, in this order
 func GetChainParams(chain string) *chaincfg.Params {
 	if !chaincfg.IsRegistered(&MainNetParams) {
+		chaincfg.ResetParams()
 		err := chaincfg.Register(&MainNetParams)
 		if err == nil {
 			err = chaincfg.Register(&TestNetParams)
