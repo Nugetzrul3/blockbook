@@ -12,7 +12,7 @@ import (
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 
-	"github.com/mitchelvanamstel/btcutilF/chaincfg"
+	"github.com/mitchelvanamstel/btcutilG/chaincfg"
 )
 
 func TestMain(m *testing.M) {

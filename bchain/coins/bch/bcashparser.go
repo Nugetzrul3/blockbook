@@ -4,9 +4,9 @@ import (
 	"fmt"
 
 	"github.com/martinboehm/bchutil"
-	"github.com/mitchelvanamstel/btcutilF"
-	"github.com/mitchelvanamstel/btcutilF/chaincfg"
-	"github.com/mitchelvanamstel/btcutilF/txscript"
+	"github.com/mitchelvanamstel/btcutilG"
+	"github.com/mitchelvanamstel/btcutilG/chaincfg"
+	"github.com/mitchelvanamstel/btcutilG/txscript"
 	"github.com/schancel/cashaddr-converter/address"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"

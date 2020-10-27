@@ -7,7 +7,7 @@ import (
 	"github.com/golang/glog"
 	"github.com/martinboehm/btcd/txscript"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/mitchelvanamstel/btcutilF/chaincfg"
+	"github.com/mitchelvanamstel/btcutilG/chaincfg"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 )

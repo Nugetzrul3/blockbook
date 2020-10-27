@@ -12,7 +12,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/mitchelvanamstel/btcutilF/chaincfg"
+	"github.com/mitchelvanamstel/btcutilG/chaincfg"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 )
 

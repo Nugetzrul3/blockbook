@@ -2,7 +2,7 @@ package deeponion
 
 import (
 	"github.com/martinboehm/btcd/wire"
-	"github.com/mitchelvanamstel/btcutilF/chaincfg"
+	"github.com/mitchelvanamstel/btcutilG/chaincfg"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 )
