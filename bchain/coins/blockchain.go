@@ -39,6 +39,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/nuls"
 	"github.com/trezor/blockbook/bchain/coins/omotenashicoin"
 	"github.com/trezor/blockbook/bchain/coins/kts"
+	"github.com/trezor/blockbook/bchain/coins/ktscs"
 	"github.com/trezor/blockbook/bchain/coins/rpd"
 	"github.com/trezor/blockbook/bchain/coins/sin"
 	"github.com/trezor/blockbook/bchain/coins/fls"
@@ -94,6 +95,7 @@ func init() {
 	BlockChainFactories["Groestlcoin"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["Groestlcoin Testnet"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["KTS"] = kts.NewPivXRPC
+	BlockChainFactories["KTSCS"] = ktscs.NewPivXRPC
 	BlockChainFactories["FLS"] = fls.NewPivXRPC
 	BlockChainFactories["RPD"] = rpd.NewPivXRPC
 	BlockChainFactories["SIN"] = sin.NewDashRPC

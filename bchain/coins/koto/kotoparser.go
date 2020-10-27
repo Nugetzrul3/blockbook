@@ -2,7 +2,7 @@ package koto
 
 import (
 	"github.com/martinboehm/btcd/wire"
-	"github.com/mitchelvanamstel/btcutilI/chaincfg"
+	"github.com/martinboehm/btcutil/chaincfg"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 )
@@ -28,7 +28,6 @@ func init() {
 	// Address encoding magics
 	MainNetParams.AddressMagicLen = 2
 	MainNetParams.PubKeyHashAddrID = []byte{0x18, 0x36} // base58 prefix: k1
-	MainNetParams.StakePubKeyHashAddrID = []byte{0x1C, 0xBD} // base58 prefix: t1
 	MainNetParams.ScriptHashAddrID = []byte{0x18, 0x3B} // base58 prefix: k3
 
 	TestNetParams = chaincfg.TestNet3Params
@@ -37,7 +36,6 @@ func init() {
 	// Address encoding magics
 	TestNetParams.AddressMagicLen = 2
 	TestNetParams.PubKeyHashAddrID = []byte{0x18, 0xA4} // base58 prefix: km
-	TestNetParams.StakePubKeyHashAddrID = []byte{0x1C, 0xBD} // base58 prefix: t1
 	TestNetParams.ScriptHashAddrID = []byte{0x18, 0x39} // base58 prefix: k2
 
 	RegtestParams = chaincfg.RegressionNetParams

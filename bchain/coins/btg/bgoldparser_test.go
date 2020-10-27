@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/mitchelvanamstel/btcutilI/chaincfg"
+	"github.com/martinboehm/btcutil/chaincfg"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 )
 

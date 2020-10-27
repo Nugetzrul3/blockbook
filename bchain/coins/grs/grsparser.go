@@ -2,8 +2,8 @@ package grs
 
 import (
 	"github.com/martinboehm/btcd/wire"
-	"github.com/mitchelvanamstel/btcutilI/base58"
-	"github.com/mitchelvanamstel/btcutilI/chaincfg"
+	"github.com/martinboehm/btcutil/base58"
+	"github.com/martinboehm/btcutil/chaincfg"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 )

@@ -8,9 +8,9 @@ import (
 
 	vlq "github.com/bsm/go-vlq"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/mitchelvanamstel/btcutilI/base58"
-	"github.com/mitchelvanamstel/btcutilI/chaincfg"
-	"github.com/mitchelvanamstel/btcutilI/hdkeychain"
+	"github.com/martinboehm/btcutil/base58"
+	"github.com/martinboehm/btcutil/chaincfg"
+	"github.com/martinboehm/btcutil/hdkeychain"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 )
@@ -40,7 +40,6 @@ func init() {
 
 	// Address encoding magics
 	MainNetParams.PubKeyHashAddrID = []byte{4, 35, 1} // base58 prefix: Ns
-	MainNetParams.StakePubKeyHashAddrID = []byte{4, 38, 1} // base58 prefix: Ns
 	MainNetParams.ScriptHashAddrID = []byte{4, 35, 1} // base58 prefix: Ns
 
 	TestNetParams = chaincfg.TestNet3Params
@@ -48,7 +47,6 @@ func init() {
 
 	// Address encoding magics
 	TestNetParams.PubKeyHashAddrID = []byte{140} // base58 prefix: y
-	TestNetParams.StakePubKeyHashAddrID = []byte{18} // base58 prefix: y
 	TestNetParams.ScriptHashAddrID = []byte{19}  // base58 prefix: 8 or 9
 
 	RegtestParams = chaincfg.RegressionNetParams
@@ -56,7 +54,6 @@ func init() {
 
 	// Address encoding magics
 	RegtestParams.PubKeyHashAddrID = []byte{140} // base58 prefix: y
-	RegtestParams.StakePubKeyHashAddrID = []byte{18} // base58 prefix: y
 	RegtestParams.ScriptHashAddrID = []byte{19}  // base58 prefix: 8 or 9
 }
 

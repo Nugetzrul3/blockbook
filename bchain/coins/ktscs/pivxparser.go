@@ -1,4 +1,4 @@
-package kts
+package ktscs
 
 import (
 	"bytes"
@@ -36,7 +36,7 @@ func init() {
 	// PIVX mainnet Address encoding magics
 	MainNetParams = chaincfg.MainNetParams
 	MainNetParams.Net = MainnetMagic
-	MainNetParams.PubKeyHashAddrID = []byte{45} // starting with 'D'
+	MainNetParams.PubKeyHashAddrID = []byte{63} // starting with 'D'
 	MainNetParams.ScriptHashAddrID = []byte{15}
 	MainNetParams.PrivateKeyID = []byte{130}
 
