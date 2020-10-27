@@ -26,7 +26,7 @@
     "binary_url": "https://github.com/DiviProject/Divi/releases/download/v1.1.2/divi-1.1.2-x86_64-linux-gnu.tar.gz",
     "extract_command": "tar -C backend --strip 1 -xf",
     "exclude_files": [
-      "bin/divi-tx",
+      "bin/divi-tx"
     ],
     "exec_command_template": "{{.Env.BackendInstallPath}}/{{.Coin.Alias}}/bin/divid -datadir={{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend -conf={{.Env.BackendInstallPath}}/{{.Coin.Alias}}/{{.Coin.Alias}}.conf -pid=/run/{{.Coin.Alias}}/{{.Coin.Alias}}.pid",
     "logrotate_files_template": "{{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend/*.log",
@@ -54,7 +54,10 @@
       "mempool_sub_workers": 2,
       "block_addresses_to_keep": 300,
       "slip44": 301,
-      "additional_params": {}
+      "additional_params": {
+        "fiat_rates": "coingecko",
+        "fiat_rates_params": "{\"url\": \"https://api.coingecko.com/api/v3\", \"coin\": \"divi\", \"periodSeconds\": 60}"
+      }
     }
   },
   "meta": {
