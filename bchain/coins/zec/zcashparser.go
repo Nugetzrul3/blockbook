@@ -32,6 +32,7 @@ func init() {
 	// Address encoding magics
 	MainNetParams.AddressMagicLen = 2
 	MainNetParams.PubKeyHashAddrID = []byte{0x1C, 0xB8} // base58 prefix: t1
+	MainNetParams.PubStakeKeyHashAddrID = []byte{0x1C, 0xBA} // base58 prefix: t1
 	MainNetParams.ScriptHashAddrID = []byte{0x1C, 0xBD} // base58 prefix: t3
 
 	TestNetParams = chaincfg.TestNet3Params
@@ -40,6 +41,7 @@ func init() {
 	// Address encoding magics
 	TestNetParams.AddressMagicLen = 2
 	TestNetParams.PubKeyHashAddrID = []byte{0x1D, 0x25} // base58 prefix: tm
+	TestNetParams.PubStakeKeyHashAddrID = []byte{0x1C, 0xBD} // base58 prefix: tm
 	TestNetParams.ScriptHashAddrID = []byte{0x1C, 0xBA} // base58 prefix: t2
 
 	RegtestParams = chaincfg.RegressionNetParams
