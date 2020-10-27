@@ -11,10 +11,10 @@ import (
 	"github.com/juju/errors"
 	"github.com/martinboehm/btcd/blockchain"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/mitchelvanamstel/btcutilB"
-	"github.com/mitchelvanamstel/btcutilB/chaincfg"
-	"github.com/mitchelvanamstel/btcutilB/hdkeychain"
-	"github.com/mitchelvanamstel/btcutilB/txscript"
+	"github.com/mitchelvanamstel/btcutilC"
+	"github.com/mitchelvanamstel/btcutilC/chaincfg"
+	"github.com/mitchelvanamstel/btcutilC/hdkeychain"
+	"github.com/mitchelvanamstel/btcutilC/txscript"
 	"github.com/trezor/blockbook/bchain"
 )
 
