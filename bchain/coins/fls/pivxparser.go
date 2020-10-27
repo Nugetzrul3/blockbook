@@ -25,6 +25,7 @@ const (
 	// Zerocoin op codes
 	OP_ZEROCOINMINT  = 0xc1
 	OP_ZEROCOINSPEND = 0xc2
+	OP_CHECKCOLDSTAKEVERIFY = 0xd1
 )
 
 // chain parameters
