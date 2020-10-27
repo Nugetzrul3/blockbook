@@ -7,6 +7,8 @@ import (
 	"io"
 	"math/big"
 
+	"fmt"
+
 	"github.com/juju/errors"
 	"github.com/martinboehm/btcd/blockchain"
 	"github.com/martinboehm/btcd/wire"
