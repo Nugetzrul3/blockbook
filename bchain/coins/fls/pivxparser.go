@@ -78,7 +78,6 @@ func NewPivXParser(params *chaincfg.Params, c *btc.Configuration) *PivXParser {
 	}
 	p.BitcoinOutputScriptToAddressesFunc = p.OutputScriptToAddressesFunc
 	p.OutputScriptToAddressesFunc = p.outputScriptToAddresses
-	p.addressToOutputScriptFunc = p.addressToOutputScript
 	return p
 }
 
