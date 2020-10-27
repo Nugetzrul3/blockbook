@@ -6,7 +6,7 @@ import (
 	"io"
 
 	"github.com/martinboehm/btcd/wire"
-	"github.com/mitchelvanamstel/btcutilH/chaincfg"
+	"github.com/mitchelvanamstel/btcutilI/chaincfg"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 	"github.com/trezor/blockbook/bchain/coins/utils"

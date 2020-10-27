@@ -16,7 +16,7 @@ import (
 
 	vlq "github.com/bsm/go-vlq"
 	"github.com/juju/errors"
-	"github.com/mitchelvanamstel/btcutilH/chaincfg"
+	"github.com/mitchelvanamstel/btcutilI/chaincfg"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 	"github.com/trezor/blockbook/common"

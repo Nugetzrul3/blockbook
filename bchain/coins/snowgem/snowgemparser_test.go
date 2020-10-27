@@ -13,7 +13,7 @@ import (
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 
-	"github.com/mitchelvanamstel/btcutilH/chaincfg"
+	"github.com/mitchelvanamstel/btcutilI/chaincfg"
 )
 
 var (

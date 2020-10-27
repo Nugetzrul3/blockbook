@@ -8,9 +8,9 @@ import (
 
 	vlq "github.com/bsm/go-vlq"
 	"github.com/martinboehm/btcd/wire"
-	"github.com/mitchelvanamstel/btcutilH/base58"
-	"github.com/mitchelvanamstel/btcutilH/chaincfg"
-	"github.com/mitchelvanamstel/btcutilH/hdkeychain"
+	"github.com/mitchelvanamstel/btcutilI/base58"
+	"github.com/mitchelvanamstel/btcutilI/chaincfg"
+	"github.com/mitchelvanamstel/btcutilI/hdkeychain"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 )

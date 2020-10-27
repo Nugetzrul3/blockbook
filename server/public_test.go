@@ -16,7 +16,7 @@ import (
 
 	"github.com/golang/glog"
 	"github.com/gorilla/websocket"
-	"github.com/mitchelvanamstel/btcutilH/chaincfg"
+	"github.com/mitchelvanamstel/btcutilI/chaincfg"
 	gosocketio "github.com/martinboehm/golang-socketio"
 	"github.com/martinboehm/golang-socketio/transport"
 	"github.com/trezor/blockbook/bchain"

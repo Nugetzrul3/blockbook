@@ -4,7 +4,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/btc"
 
 	"github.com/martinboehm/btcd/wire"
-	"github.com/mitchelvanamstel/btcutilH/chaincfg"
+	"github.com/mitchelvanamstel/btcutilI/chaincfg"
 )
 
 // magic numbers
