@@ -56,7 +56,7 @@ func init() {
 
 	// Address encoding magics
 	RegtestParams.PubKeyHashAddrID = []byte{140} // base58 prefix: y
-	RegtestParams.PubStakeKeyHashAddrID = []byte{18} // base58 prefix: y
+	RegtestParams.StakePubKeyHashAddrID = []byte{18} // base58 prefix: y
 	RegtestParams.ScriptHashAddrID = []byte{19}  // base58 prefix: 8 or 9
 }
 
