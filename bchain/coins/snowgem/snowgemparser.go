@@ -5,7 +5,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/btc"
 
 	"github.com/martinboehm/btcd/wire"
-	"github.com/martinboehm/btcutil/chaincfg"
+	"github.com/mitchelvanamstel/btcutilF/chaincfg"
 )
 
 const (
