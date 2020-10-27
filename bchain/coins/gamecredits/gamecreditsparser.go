@@ -2,7 +2,7 @@ package gamecredits
 
 import (
 	"github.com/martinboehm/btcd/wire"
-	"github.com/mitchelvanamstel/btcutilG/chaincfg"
+	"github.com/mitchelvanamstel/btcutilH/chaincfg"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 )
 
