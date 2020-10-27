@@ -22,14 +22,14 @@ func init() {
 	MainNetParams = chaincfg.MainNetParams
 	MainNetParams.Net = MainnetMagic
 	MainNetParams.PubKeyHashAddrID = []byte{25}
-	MainNetParams.PubStakeKeyHashAddrID = []byte{00}
+	MainNetParams.StakePubKeyHashAddrID = []byte{00}
 	MainNetParams.ScriptHashAddrID = []byte{85}
 	MainNetParams.Bech32HRPSegwit = "bm"
 
 	TestNetParams = chaincfg.TestNet3Params
 	TestNetParams.Net = TestnetMagic
 	TestNetParams.PubKeyHashAddrID = []byte{111}
-	TestNetParams.PubStakeKeyHashAddrID = []byte{00}
+	TestNetParams.StakePubKeyHashAddrID = []byte{00}
 	TestNetParams.ScriptHashAddrID = []byte{196}
 	TestNetParams.Bech32HRPSegwit = "bt"
 }
