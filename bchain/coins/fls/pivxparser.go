@@ -162,12 +162,12 @@ func (p *PivXParser) GetAddrDescFromAddress(address string) (bchain.AddressDescr
 }
 
 func (p *PivXParser) addressToOutputScript(address string) ([]byte, error) {
-	da, err := btcutil.DecodeAddress(address, chaincfg.MainNetParams)
+	da, err := btcutil.DecodeAddress(address, &chaincfg.MainNetParams)
 	if err != nil {
 		// Also check P2CS
 		stakeParams := chaincfg.MainNetParams
 		stakeParams.PubKeyHashAddrID = []byte{63}
-		da, err := btcutil.DecodeAddress(address, stakeParams)
+		da, err := btcutil.DecodeAddress(address, &stakeParams)
 		if err != nil {
 			return nil, err
 		} else {
