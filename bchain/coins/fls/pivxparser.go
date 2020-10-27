@@ -10,6 +10,7 @@ import (
 	"github.com/juju/errors"
 	"github.com/martinboehm/btcd/blockchain"
 	"github.com/martinboehm/btcd/wire"
+	"github.com/martinboehm/btcutil"
 	"github.com/martinboehm/btcutil/chaincfg"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
@@ -228,6 +229,47 @@ func (p *PivXParser) ParseTxFromJson(msg json.RawMessage) (*bchain.Tx, error) {
 	return &tx, nil
 }
 
+func isP2CSScript(signatureScript []byte) bool {
+	return len(signatureScript) > 50 && signatureScript[4] == OP_CHECKCOLDSTAKEVERIFY
+}
+
+func (p *PivXParser) P2CSScriptToAddress(script []byte) ([]string, bool, error) {
+	/*sc, addresses, _, err := txscript.ExtractPkScriptAddrs(script, p.Params)
+	if err != nil {
+		return nil, false, err
+	}
+	rv := make([]string, len(addresses))
+	for i, a := range addresses {
+		rv[i] = a.EncodeAddress()
+	}
+	var s bool
+	if sc == txscript.PubKeyHashTy || sc == txscript.WitnessV0PubKeyHashTy || sc == txscript.ScriptHashTy || sc == txscript.WitnessV0ScriptHashTy {
+		s = true
+	} else if len(rv) == 0 {
+		or := p.TryParseOPReturn(script)
+		if or != "" {
+			rv = []string{or}
+		}
+	}
+	return rv, s, nil*/
+
+	stakeParams := chaincfg.MainNetParams
+	stakeParams.PubKeyHashAddrID = []byte{63}
+
+	StakerScript := make([]byte, 20)
+	copy(StakerScript, script[6:27])
+	StakerAddr, err := btcutil.NewAddressPubKeyHash(StakerScript, &stakeParams)
+
+	if err != nil {
+		return nil, false, err
+	}
+
+	rv := make([]string, 1)
+	rv[0] = StakerAddr.EncodeAddress()
+
+	return rv, true, nil
+}
+
 // outputScriptToAddresses converts ScriptPubKey to bitcoin addresses
 func (p *PivXParser) outputScriptToAddresses(script []byte) ([]string, bool, error) {
 	if isZeroCoinSpendScript(script) {
@@ -235,6 +277,10 @@ func (p *PivXParser) outputScriptToAddresses(script []byte) ([]string, bool, err
 	}
 	if isZeroCoinMintScript(script) {
 		return []string{"Zerocoin Mint"}, false, nil
+	}
+
+	if isP2CSScript(script) {
+		return p.P2CSScriptToAddress(script)
 	}
 
 	rv, s, _ := p.BitcoinOutputScriptToAddressesFunc(script)
