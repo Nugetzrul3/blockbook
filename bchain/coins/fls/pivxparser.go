@@ -12,6 +12,7 @@ import (
 	"github.com/martinboehm/btcd/wire"
 	"github.com/martinboehm/btcutil"
 	"github.com/martinboehm/btcutil/chaincfg"
+	"github.com/martinboehm/btcutil/txscript"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 	"github.com/trezor/blockbook/bchain/coins/utils"
@@ -26,6 +27,16 @@ const (
 	OP_ZEROCOINMINT  = 0xc1
 	OP_ZEROCOINSPEND = 0xc2
 	OP_CHECKCOLDSTAKEVERIFY = 0xd1
+
+	// Labels
+	ZCMINT_LABEL = "Zerocoin Mint"
+	ZCSPEND_LABEL = "Zerocoin Spend"
+	CBASE_LABEL = "CoinBase TX"
+	CSTAKE_LABEL = "CoinStake TX"
+
+	// Dummy Internal Addresses
+	CBASE_ADDR_INT = 0xf7
+	CSTAKE_ADDR_INT = 0xf8
 )
 
 // chain parameters
@@ -183,6 +194,13 @@ func (p *PivXParser) TxFromMsgTx(t *wire.MsgTx, parseAddresses bool) bchain.Tx {
 			// missing: Asm,
 			// missing: Type,
 		}
+		if s.Hex == "" {
+			if blockchain.IsCoinBaseTx(t) {
+				s.Hex = fmt.Sprintf("%02x", CBASE_ADDR_INT)
+			} else {
+				s.Hex = fmt.Sprintf("%02x", CSTAKE_ADDR_INT)
+			}
+		}
 		var vs big.Int
 		vs.SetInt64(out.Value)
 		vout[i] = bchain.Vout{
@@ -225,6 +243,15 @@ func (p *PivXParser) ParseTxFromJson(msg json.RawMessage) (*bchain.Tx, error) {
 		if vout.ScriptPubKey.Addresses == nil {
 			vout.ScriptPubKey.Addresses = []string{}
 		}
+
+		if vout.ScriptPubKey.Hex == "" {
+			if isCoinbaseTx(tx) {
+				vout.ScriptPubKey.Hex = fmt.Sprintf("%02x", CBASE_ADDR_INT)
+			} else {
+				vout.ScriptPubKey.Hex = fmt.Sprintf("%02x", CSTAKE_ADDR_INT)
+			}
+		}
+
 	}
 
 	return &tx, nil
@@ -274,10 +301,17 @@ func (p *PivXParser) P2CSScriptToAddress(script []byte) ([]string, bool, error) 
 // outputScriptToAddresses converts ScriptPubKey to bitcoin addresses
 func (p *PivXParser) outputScriptToAddresses(script []byte) ([]string, bool, error) {
 	if isZeroCoinSpendScript(script) {
-		return []string{"Zerocoin Spend"}, false, nil
+		return []string{ZCSPEND_LABEL}, false, nil
 	}
 	if isZeroCoinMintScript(script) {
-		return []string{"Zerocoin Mint"}, false, nil
+		return []string{ZCMINT_LABEL}, false, nil
+	}
+
+	if isCoinBaseFakeAddr(script) {
+		return []string{CBASE_LABEL}, false, nil
+	}
+	if isCoinStakeFakeAddr(script) {
+		return []string{CSTAKE_LABEL}, false, nil
 	}
 
 	if isP2CSScript(script) {
@@ -286,6 +320,18 @@ func (p *PivXParser) outputScriptToAddresses(script []byte) ([]string, bool, err
 
 	rv, s, _ := p.BitcoinOutputScriptToAddressesFunc(script)
 	return rv, s, nil
+}
+
+// IsAddrDescIndexable returns true if AddressDescriptor should be added to index
+// empty or OP_RETURN scripts are not indexed.
+// also are not indexed: zerocoin mints/spends coinbase txes and coinstake markers
+func (p *PivXParser) IsAddrDescIndexable(addrDesc bchain.AddressDescriptor) bool {
+	if len(addrDesc) == 0 || addrDesc[0] == txscript.OP_RETURN ||
+		isCoinBaseFakeAddr(addrDesc) || isCoinStakeFakeAddr(addrDesc) ||
+		isZeroCoinSpendScript(addrDesc) || isZeroCoinMintScript(addrDesc) {
+		return false
+	}
+	return true
 }
 
 func (p *PivXParser) GetAddrDescForUnknownInput(tx *bchain.Tx, input int) bchain.AddressDescriptor {
@@ -310,4 +356,19 @@ func isZeroCoinMintScript(signatureScript []byte) bool {
 // Checks if script is OP_ZEROCOINSPEND
 func isZeroCoinSpendScript(signatureScript []byte) bool {
 	return len(signatureScript) >= 100 && signatureScript[0] == OP_ZEROCOINSPEND
+}
+
+// Checks if script is dummy internal address for Coinbase
+func isCoinBaseFakeAddr(signatureScript []byte) bool {
+	return len(signatureScript) == 1 && signatureScript[0] == CBASE_ADDR_INT
+}
+
+// Checks if script is dummy internal address for Stake
+func isCoinStakeFakeAddr(signatureScript []byte) bool {
+	return len(signatureScript) == 1 && signatureScript[0] == CSTAKE_ADDR_INT
+}
+
+// Checks if a Tx is coinbase
+func isCoinbaseTx(tx bchain.Tx) bool {
+	return len(tx.Vin) == 1 && tx.Vin[0].Coinbase != ""
 }
