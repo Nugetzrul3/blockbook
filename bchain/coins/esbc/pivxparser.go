@@ -86,7 +86,7 @@ func GetChainParams(chain string) *chaincfg.Params {
 }
 
 // GetBlock returns block with given hash
-func (p *PivXParser) GetBlock(hash string, height uint32) (*bchain.Block, error) {
+/*func (p *PivXParser) GetBlock(hash string, height uint32) (*bchain.Block, error) {
 	if hash == "" && height < firstBlockWithSpecialTransactions {
 		return p.BitcoinRPC.GetBlock(hash, height)
 	}
@@ -131,7 +131,7 @@ func (p *PivXParser) GetBlock(hash string, height uint32) (*bchain.Block, error)
 		Txs:         txs,
 	}
 	return block, nil
-}
+}*/
 
 // ParseBlock parses raw block to our Block struct
 /*func (p *PivXParser) ParseBlock(b []byte) (*bchain.Block, error) {
