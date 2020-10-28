@@ -99,7 +99,7 @@ func (p *PivXParser) GetBlock(hash string, height uint32) (*bchain.Block, error)
 		}
 	}
 
-	glog.V(1).Info("rpc: getblock (verbosity=1) ", hash)
+	//glog.V(1).Info("rpc: getblock (verbosity=1) ", hash)
 
 	res := btc.ResGetBlockThin{}
 	req := btc.CmdGetBlock{Method: "getblock"}
@@ -119,7 +119,7 @@ func (p *PivXParser) GetBlock(hash string, height uint32) (*bchain.Block, error)
 		tx, err := p.GetTransaction(txid)
 		if err != nil {
 			if err == bchain.ErrTxNotFound {
-				glog.Errorf("rpc: getblock: skipping transanction in block %s due error: %s", hash, err)
+				//glog.Errorf("rpc: getblock: skipping transanction in block %s due error: %s", hash, err)
 				continue
 			}
 			return nil, err
