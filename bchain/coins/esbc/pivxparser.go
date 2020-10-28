@@ -86,14 +86,14 @@ func GetChainParams(chain string) *chaincfg.Params {
 }
 
 // GetBlock returns block with given hash
-func (b *PivXParser) GetBlock(hash string, height uint32) (*bchain.Block, error) {
+func (p *PivXParser) GetBlock(hash string, height uint32) (*bchain.Block, error) {
 	if hash == "" && height < firstBlockWithSpecialTransactions {
-		return b.BitcoinRPC.GetBlock(hash, height)
+		return p.BitcoinRPC.GetBlock(hash, height)
 	}
 
 	var err error
 	if hash == "" && height > 0 {
-		hash, err = b.GetBlockHash(height)
+		hash, err = p.GetBlockHash(height)
 		if err != nil {
 			return nil, err
 		}
@@ -105,7 +105,7 @@ func (b *PivXParser) GetBlock(hash string, height uint32) (*bchain.Block, error)
 	req := btc.CmdGetBlock{Method: "getblock"}
 	req.Params.BlockHash = hash
 	req.Params.Verbosity = 1
-	err = b.Call(&req, &res)
+	err = p.Call(&req, &res)
 
 	if err != nil {
 		return nil, errors.Annotatef(err, "hash %v", hash)
@@ -116,7 +116,7 @@ func (b *PivXParser) GetBlock(hash string, height uint32) (*bchain.Block, error)
 
 	txs := make([]bchain.Tx, 0, len(res.Result.Txids))
 	for _, txid := range res.Result.Txids {
-		tx, err := b.GetTransaction(txid)
+		tx, err := p.GetTransaction(txid)
 		if err != nil {
 			if err == bchain.ErrTxNotFound {
 				glog.Errorf("rpc: getblock: skipping transanction in block %s due error: %s", hash, err)
