@@ -25,7 +25,7 @@
     "version": "0.17.1.6",
     "binary_url": "http://54.36.62.167/debian/esbc.zip",
     "verification_type": "sha256",
-    "verification_source": "9a559c998b9ba21fb6de4adfe1b4e201bcef17a75632dea4b9c2b9f441588802",
+    "verification_source": "afc040b0b2540cd1c5f26f0b33d36194b3911b14dd51bb53af8a32b350da0949",
     "extract_command": "unzip -d backend",
     "exclude_files": [],
     "exec_command_template": "{{.Env.BackendInstallPath}}/{{.Coin.Alias}}/esbcoind -datadir={{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend -conf={{.Env.BackendInstallPath}}/{{.Coin.Alias}}/{{.Coin.Alias}}.conf -pid=/run/{{.Coin.Alias}}/{{.Coin.Alias}}.pid",
