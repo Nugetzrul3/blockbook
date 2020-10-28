@@ -4,16 +4,13 @@ import (
 	"bytes"
 	"encoding/hex"
 	"encoding/json"
-	"io"
 	"math/big"
 
-	"github.com/juju/errors"
 	"github.com/martinboehm/btcd/blockchain"
 	"github.com/martinboehm/btcd/wire"
 	"github.com/martinboehm/btcutil/chaincfg"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
-	"github.com/trezor/blockbook/bchain/coins/utils"
 )
 
 // magic numbers
