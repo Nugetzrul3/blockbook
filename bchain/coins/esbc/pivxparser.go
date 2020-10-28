@@ -4,18 +4,21 @@ import (
 	"bytes"
 	"encoding/hex"
 	"encoding/json"
+	"io"
 	"math/big"
 
+	"github.com/juju/errors"
 	"github.com/martinboehm/btcd/blockchain"
 	"github.com/martinboehm/btcd/wire"
 	"github.com/martinboehm/btcutil/chaincfg"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/btc"
+	"github.com/trezor/blockbook/bchain/coins/utils"
 )
 
 // magic numbers
 const (
-	MainnetMagic wire.BitcoinNet = 0x4fc1997d
+	MainnetMagic wire.BitcoinNet = 0x65426574
 	TestnetMagic wire.BitcoinNet = 0xba657645
 
 	// Zerocoin op codes
@@ -33,9 +36,9 @@ func init() {
 	// PIVX mainnet Address encoding magics
 	MainNetParams = chaincfg.MainNetParams
 	MainNetParams.Net = MainnetMagic
-	MainNetParams.PubKeyHashAddrID = []byte{45} // starting with 'D'
-	MainNetParams.ScriptHashAddrID = []byte{15}
-	MainNetParams.PrivateKeyID = []byte{130}
+	MainNetParams.PubKeyHashAddrID = []byte{92} // starting with 'D'
+	MainNetParams.ScriptHashAddrID = []byte{63}
+	MainNetParams.PrivateKeyID = []byte{25}
 
 	// PIVX testnet Address encoding magics
 	TestNetParams = chaincfg.TestNet3Params
@@ -82,56 +85,8 @@ func GetChainParams(chain string) *chaincfg.Params {
 	}
 }
 
-// GetBlock returns block with given hash
-/*func (p *PivXParser) GetBlock(hash string, height uint32) (*bchain.Block, error) {
-	if hash == "" && height < firstBlockWithSpecialTransactions {
-		return p.BitcoinRPC.GetBlock(hash, height)
-	}
-
-	var err error
-	if hash == "" && height > 0 {
-		hash, err = p.GetBlockHash(height)
-		if err != nil {
-			return nil, err
-		}
-	}
-
-	//glog.V(1).Info("rpc: getblock (verbosity=1) ", hash)
-
-	res := btc.ResGetBlockThin{}
-	req := btc.CmdGetBlock{Method: "getblock"}
-	req.Params.BlockHash = hash
-	req.Params.Verbosity = 1
-	err = p.Call(&req, &res)
-
-	if err != nil {
-		return nil, errors.Annotatef(err, "hash %v", hash)
-	}
-	if res.Error != nil {
-		return nil, errors.Annotatef(res.Error, "hash %v", hash)
-	}
-
-	txs := make([]bchain.Tx, 0, len(res.Result.Txids))
-	for _, txid := range res.Result.Txids {
-		tx, err := p.GetTransaction(txid)
-		if err != nil {
-			if err == bchain.ErrTxNotFound {
-				//glog.Errorf("rpc: getblock: skipping transanction in block %s due error: %s", hash, err)
-				continue
-			}
-			return nil, err
-		}
-		txs = append(txs, *tx)
-	}
-	block := &bchain.Block{
-		BlockHeader: res.Result.BlockHeader,
-		Txs:         txs,
-	}
-	return block, nil
-}*/
-
 // ParseBlock parses raw block to our Block struct
-/*func (p *PivXParser) ParseBlock(b []byte) (*bchain.Block, error) {
+func (p *PivXParser) ParseBlock(b []byte) (*bchain.Block, error) {
 	r := bytes.NewReader(b)
 	w := wire.MsgBlock{}
 	h := wire.BlockHeader{}
@@ -162,7 +117,7 @@ func GetChainParams(chain string) *chaincfg.Params {
 		},
 		Txs: txs,
 	}, nil
-}*/
+}
 
 // PackTx packs transaction to byte array using protobuf
 func (p *PivXParser) PackTx(tx *bchain.Tx, height uint32, blockTime int64) ([]byte, error) {
