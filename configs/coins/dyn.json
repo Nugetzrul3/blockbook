@@ -3,7 +3,7 @@
     "name": "DYN",
     "shortcut": "DYN",
     "label": "DYN",
-    "alias": "scc"
+    "alias": "dyn"
   },
   "ports": {
     "backend_rpc": 8017,
