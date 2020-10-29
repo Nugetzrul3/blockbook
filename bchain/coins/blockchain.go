@@ -26,6 +26,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/dogecoin"
 	"github.com/trezor/blockbook/bchain/coins/eth"
 	"github.com/trezor/blockbook/bchain/coins/flo"
+	"github.com/trezor/blockbook/bchain/coins/cspn"
 	"github.com/trezor/blockbook/bchain/coins/fujicoin"
 	"github.com/trezor/blockbook/bchain/coins/gamecredits"
 	"github.com/trezor/blockbook/bchain/coins/grs"
@@ -103,6 +104,7 @@ func init() {
 	BlockChainFactories["ESBC"] = esbc.NewDashRPC
 	BlockChainFactories["SIN"] = sin.NewDashRPC
 	BlockChainFactories["DYN"] = dyn.NewDashRPC
+	BlockChainFactories["CSPN"] = cspn.NewDashRPC
 	BlockChainFactories["Polis"] = polis.NewPolisRPC
 	BlockChainFactories["Zcoin"] = xzc.NewZcoinRPC
 	BlockChainFactories["Fujicoin"] = fujicoin.NewFujicoinRPC
