@@ -34,6 +34,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/esbc"
 	"github.com/trezor/blockbook/bchain/coins/litecoin"
 	"github.com/trezor/blockbook/bchain/coins/monacoin"
+	"github.com/trezor/blockbook/bchain/coins/dyn"
 	"github.com/trezor/blockbook/bchain/coins/monetaryunit"
 	"github.com/trezor/blockbook/bchain/coins/myriad"
 	"github.com/trezor/blockbook/bchain/coins/namecoin"
@@ -101,6 +102,7 @@ func init() {
 	BlockChainFactories["RPD"] = rpd.NewPivXRPC
 	BlockChainFactories["ESBC"] = esbc.NewDashRPC
 	BlockChainFactories["SIN"] = sin.NewDashRPC
+	BlockChainFactories["DYN"] = dyn.NewDashRPC
 	BlockChainFactories["Polis"] = polis.NewPolisRPC
 	BlockChainFactories["Zcoin"] = xzc.NewZcoinRPC
 	BlockChainFactories["Fujicoin"] = fujicoin.NewFujicoinRPC
