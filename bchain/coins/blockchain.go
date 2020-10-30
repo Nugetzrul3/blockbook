@@ -46,6 +46,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/rpd"
 	"github.com/trezor/blockbook/bchain/coins/sin"
 	"github.com/trezor/blockbook/bchain/coins/fls"
+	"github.com/trezor/blockbook/bchain/coins/telos"
 	"github.com/trezor/blockbook/bchain/coins/polis"
 	"github.com/trezor/blockbook/bchain/coins/qtum"
 	"github.com/trezor/blockbook/bchain/coins/ravencoin"
@@ -101,6 +102,7 @@ func init() {
 	BlockChainFactories["KTSCS"] = ktscs.NewPivXRPC
 	BlockChainFactories["FLS"] = fls.NewPivXRPC
 	BlockChainFactories["RPD"] = rpd.NewPivXRPC
+	BlockChainFactories["TELOS"] = telos.NewPivXRPC
 	BlockChainFactories["ESBC"] = esbc.NewDashRPC
 	BlockChainFactories["SIN"] = sin.NewDashRPC
 	BlockChainFactories["DYN"] = dyn.NewDashRPC
