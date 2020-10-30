@@ -20,6 +20,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/dash"
 	"github.com/trezor/blockbook/bchain/coins/scc"
 	"github.com/trezor/blockbook/bchain/coins/dcr"
+	"github.com/trezor/blockbook/bchain/coins/azr"
 	"github.com/trezor/blockbook/bchain/coins/deeponion"
 	"github.com/trezor/blockbook/bchain/coins/digibyte"
 	"github.com/trezor/blockbook/bchain/coins/divi"
@@ -100,6 +101,7 @@ func init() {
 	BlockChainFactories["Groestlcoin Testnet"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["KTS"] = kts.NewPivXRPC
 	BlockChainFactories["KTSCS"] = ktscs.NewPivXRPC
+	BlockChainFactories["AZR"] = azr.NewPivXRPC
 	BlockChainFactories["FLS"] = fls.NewPivXRPC
 	BlockChainFactories["RPD"] = rpd.NewPivXRPC
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
