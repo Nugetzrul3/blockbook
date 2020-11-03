@@ -31,7 +31,7 @@
       "sap-tx",
       "sap-qt"
     ],
-    "exec_command_template": "{{.Env.BackendInstallPath}}/{{.Coin.Alias}}/securusd -datadir={{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend -conf={{.Env.BackendInstallPath}}/{{.Coin.Alias}}/{{.Coin.Alias}}.conf -pid=/run/{{.Coin.Alias}}/{{.Coin.Alias}}.pid",
+    "exec_command_template": "{{.Env.BackendInstallPath}}/{{.Coin.Alias}}/sapd -datadir={{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend -conf={{.Env.BackendInstallPath}}/{{.Coin.Alias}}/{{.Coin.Alias}}.conf -pid=/run/{{.Coin.Alias}}/{{.Coin.Alias}}.pid",
     "logrotate_files_template": "{{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend/*.log",
     "postinst_script_template": "",
     "service_type": "forking",
