@@ -1,9 +1,9 @@
 {
   "coin": {
-    "name": "FLS",
-    "shortcut": "FLS",
-    "label": "FLS",
-    "alias": "fls"
+    "name": "SSS",
+    "shortcut": "SSS",
+    "label": "SSS",
+    "alias": "sss"
   },
   "ports": {
     "backend_rpc": 8027,
