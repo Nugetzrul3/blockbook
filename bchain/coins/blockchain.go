@@ -14,6 +14,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/bellcoin"
 	"github.com/trezor/blockbook/bchain/coins/bitcore"
 	"github.com/trezor/blockbook/bchain/coins/bitzeny"
+	"github.com/trezor/blockbook/bchain/coins/dms"
 	"github.com/trezor/blockbook/bchain/coins/btc"
 	"github.com/trezor/blockbook/bchain/coins/znz"
 	"github.com/trezor/blockbook/bchain/coins/xscr"
@@ -110,6 +111,7 @@ func init() {
 	BlockChainFactories["AZR"] = azr.NewPivXRPC
 	BlockChainFactories["PNY"] = pny.NewPivXRPC
 	BlockChainFactories["NAV"] = nav.NewDashRPC
+	BlockChainFactories["DMS"] = dms.NewDashRPC
 	BlockChainFactories["ZNZ"] = znz.NewDashRPC
 	BlockChainFactories["FLS"] = fls.NewPivXRPC
 	BlockChainFactories["RPD"] = rpd.NewDashRPC
