@@ -23,6 +23,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/cpuchain"
 	"github.com/trezor/blockbook/bchain/coins/dash"
 	"github.com/trezor/blockbook/bchain/coins/nav"
+	"github.com/trezor/blockbook/bchain/coins/colx"
 	"github.com/trezor/blockbook/bchain/coins/scc"
 	"github.com/trezor/blockbook/bchain/coins/dcr"
 	"github.com/trezor/blockbook/bchain/coins/azr"
@@ -111,6 +112,7 @@ func init() {
 	BlockChainFactories["KTSCS"] = ktscs.NewPivXRPC
 	BlockChainFactories["AZR"] = azr.NewPivXRPC
 	BlockChainFactories["PNY"] = pny.NewPivXRPC
+	BlockChainFactories["COLX"] = colx.NewPivXRPC
 	BlockChainFactories["NAV"] = nav.NewDashRPC
 	BlockChainFactories["DMS"] = dms.NewDashRPC
 	BlockChainFactories["SSS"] = sss.NewPivXRPC
