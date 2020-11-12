@@ -21,6 +21,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/btg"
 	"github.com/trezor/blockbook/bchain/coins/sss"
 	"github.com/trezor/blockbook/bchain/coins/ers"
+	"github.com/trezor/blockbook/bchain/coins/scm"
 	"github.com/trezor/blockbook/bchain/coins/cpuchain"
 	"github.com/trezor/blockbook/bchain/coins/dash"
 	"github.com/trezor/blockbook/bchain/coins/nav"
@@ -121,6 +122,7 @@ func init() {
 	BlockChainFactories["FLS"] = fls.NewPivXRPC
 	BlockChainFactories["RPD"] = rpd.NewDashRPC
 	BlockChainFactories["SAPP"] = sapp.NewPivXRPC
+	BlockChainFactories["SCM"] = scm.NewPivXRPC
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
 	BlockChainFactories["ERS"] = ers.NewPivXRPC
 	BlockChainFactories["ESBC"] = esbc.NewDashRPC
