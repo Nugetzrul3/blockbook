@@ -18,7 +18,7 @@ import (
 
 // magic numbers
 const (
-	MainnetMagic wire.BitcoinNet = 0xc8c8cacb
+	MainnetMagic wire.BitcoinNet = 0xc77a8778
 	TestnetMagic wire.BitcoinNet = 0xba657645
 
 	// Zerocoin op codes
@@ -36,9 +36,9 @@ func init() {
 	// PIVX mainnet Address encoding magics
 	MainNetParams = chaincfg.MainNetParams
 	MainNetParams.Net = MainnetMagic
-	MainNetParams.PubKeyHashAddrID = []byte{63} // starting with 'D'
-	MainNetParams.ScriptHashAddrID = []byte{28}
-	MainNetParams.PrivateKeyID = []byte{212}
+	MainNetParams.PubKeyHashAddrID = []byte{15} // starting with 'D'
+	MainNetParams.ScriptHashAddrID = []byte{16}
+	MainNetParams.PrivateKeyID = []byte{43}
 
 	// PIVX testnet Address encoding magics
 	TestNetParams = chaincfg.TestNet3Params
