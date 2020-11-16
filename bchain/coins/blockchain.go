@@ -28,6 +28,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/nav"
 	"github.com/trezor/blockbook/bchain/coins/colx"
 	"github.com/trezor/blockbook/bchain/coins/scc"
+	"github.com/trezor/blockbook/bchain/coins/kyd"
 	"github.com/trezor/blockbook/bchain/coins/dcr"
 	"github.com/trezor/blockbook/bchain/coins/azr"
 	"github.com/trezor/blockbook/bchain/coins/deeponion"
