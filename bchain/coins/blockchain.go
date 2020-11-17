@@ -120,7 +120,7 @@ func init() {
 	BlockChainFactories["DOGEC"] = dogec.NewPivXRPC
 	BlockChainFactories["KTSCS"] = ktscs.NewPivXRPC
 	BlockChainFactories["AZR"] = azr.NewPivXRPC
-	BlockChainFactories["AXEL"] = axel.NewPivXRPC
+	BlockChainFactories["AXEL"] = axel.NewDashRPC
 	BlockChainFactories["PNY"] = pny.NewPivXRPC
 	BlockChainFactories["COLX"] = colx.NewPivXRPC
 	BlockChainFactories["NAV"] = nav.NewDashRPC
