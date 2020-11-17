@@ -23,6 +23,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/egg"
 	"github.com/trezor/blockbook/bchain/coins/ers"
 	"github.com/trezor/blockbook/bchain/coins/jackpot"
+	"github.com/trezor/blockbook/bchain/coins/axel"
 	"github.com/trezor/blockbook/bchain/coins/scm"
 	"github.com/trezor/blockbook/bchain/coins/cpuchain"
 	"github.com/trezor/blockbook/bchain/coins/dash"
@@ -119,6 +120,7 @@ func init() {
 	BlockChainFactories["DOGEC"] = dogec.NewPivXRPC
 	BlockChainFactories["KTSCS"] = ktscs.NewPivXRPC
 	BlockChainFactories["AZR"] = azr.NewPivXRPC
+	BlockChainFactories["AXEL"] = axel.NewPivXRPC
 	BlockChainFactories["PNY"] = pny.NewPivXRPC
 	BlockChainFactories["COLX"] = colx.NewPivXRPC
 	BlockChainFactories["NAV"] = nav.NewDashRPC
