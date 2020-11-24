@@ -20,6 +20,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/xscr"
 	"github.com/trezor/blockbook/bchain/coins/btg"
 	"github.com/trezor/blockbook/bchain/coins/sss"
+	"github.com/trezor/blockbook/bchain/coins/xgs"
 	"github.com/trezor/blockbook/bchain/coins/egg"
 	"github.com/trezor/blockbook/bchain/coins/ers"
 	"github.com/trezor/blockbook/bchain/coins/jackpot"
@@ -95,6 +96,7 @@ func init() {
 	BlockChainFactories["Dash"] = dash.NewDashRPC
 	BlockChainFactories["SCC"] = scc.NewDashRPC
 	BlockChainFactories["CTSC"] = ctsc.NewDashRPC
+	BlockChainFactories["XGS"] = xgs.NewDashRPC
 	BlockChainFactories["Dash Testnet"] = dash.NewDashRPC
 	BlockChainFactories["Decred"] = dcr.NewDecredRPC
 	BlockChainFactories["Decred Testnet"] = dcr.NewDecredRPC
