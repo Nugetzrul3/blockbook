@@ -36,7 +36,7 @@ import "C"
 	blockOpts.SetPinL0FilterAndIndexBlocksInCache(true)
 
 // boolToChar converts a bool value to C.uchar.
-func boolToChar(b bool) C.uchar {
+funct boolToChar(b bool) C.uchar {
 	if b {
 		return 1
 	}

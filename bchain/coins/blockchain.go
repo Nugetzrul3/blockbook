@@ -19,6 +19,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/znz"
 	"github.com/trezor/blockbook/bchain/coins/xscr"
 	"github.com/trezor/blockbook/bchain/coins/btg"
+	"github.com/trezor/blockbook/bchain/coins/funct"
 	"github.com/trezor/blockbook/bchain/coins/sss"
 	"github.com/trezor/blockbook/bchain/coins/xgs"
 	"github.com/trezor/blockbook/bchain/coins/egg"
@@ -117,6 +118,7 @@ func init() {
 	BlockChainFactories["Myriad"] = myriad.NewMyriadRPC
 	BlockChainFactories["Liquid"] = liquid.NewLiquidRPC
 	BlockChainFactories["777"] = jackpot.NewPivXRPC
+	BlockChainFactories["FUNC"] = funct.NewPivXRPC
 	BlockChainFactories["Groestlcoin"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["Groestlcoin Testnet"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["KTS"] = kts.NewPivXRPC
