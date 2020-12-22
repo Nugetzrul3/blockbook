@@ -23,6 +23,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/trtt"
 	"github.com/trezor/blockbook/bchain/coins/sss"
 	"github.com/trezor/blockbook/bchain/coins/xgs"
+	"github.com/trezor/blockbook/bchain/coins/twins"
 	"github.com/trezor/blockbook/bchain/coins/egg"
 	"github.com/trezor/blockbook/bchain/coins/ers"
 	"github.com/trezor/blockbook/bchain/coins/jackpot"
