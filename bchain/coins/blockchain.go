@@ -28,6 +28,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/axel"
 	"github.com/trezor/blockbook/bchain/coins/nbx"
 	"github.com/trezor/blockbook/bchain/coins/scm"
+	"github.com/trezor/blockbook/bchain/coins/sove"
 	"github.com/trezor/blockbook/bchain/coins/cpuchain"
 	"github.com/trezor/blockbook/bchain/coins/dash"
 	"github.com/trezor/blockbook/bchain/coins/nav"
@@ -129,6 +130,7 @@ func init() {
 	BlockChainFactories["AZR"] = azr.NewPivXRPC
 	BlockChainFactories["AXEL"] = axel.NewDashRPC
 	BlockChainFactories["PNY"] = pny.NewPivXRPC
+	BlockChainFactories["SOVE"] = sove.NewPivXRPC
 	BlockChainFactories["COLX"] = colx.NewPivXRPC
 	BlockChainFactories["NAV"] = nav.NewDashRPC
 	BlockChainFactories["DMS"] = dms.NewDashRPC
