@@ -55,8 +55,7 @@
       "mempool_sub_workers": 2,
       "block_addresses_to_keep": 300,
       "xpub_magic": 36513075,
-      "slip44": 119,
-      "additional_params": { }
+      "slip44": 119
     }
   },
   "meta": {
