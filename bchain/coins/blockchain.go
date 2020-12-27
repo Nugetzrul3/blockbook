@@ -134,7 +134,7 @@ func init() {
 	BlockChainFactories["XSN"] = xsn.NewPivXRPC
 	BlockChainFactories["KTSCS"] = ktscs.NewPivXRPC
 	BlockChainFactories["AZR"] = azr.NewPivXRPC
-	BlockChainFactories["APR"] = apr.NewPivXRPC
+	BlockChainFactories["APR"] = apr.NewDashRPC
 	BlockChainFactories["AXEL"] = axel.NewDashRPC
 	BlockChainFactories["PNY"] = pny.NewPivXRPC
 	BlockChainFactories["SOVE"] = sove.NewPivXRPC
