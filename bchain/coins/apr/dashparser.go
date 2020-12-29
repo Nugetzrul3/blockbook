@@ -30,8 +30,8 @@ func init() {
 	MainNetParams.Net = MainnetMagic
 
 	// Address encoding magics
-	MainNetParams.PubKeyHashAddrID = []byte{98} // base58 prefix: X
-	MainNetParams.ScriptHashAddrID = []byte{12} // base58 prefix: 7
+	MainNetParams.PubKeyHashAddrID = []byte{12} // base58 prefix: X
+	MainNetParams.ScriptHashAddrID = []byte{6} // base58 prefix: 7
 
 	TestNetParams = chaincfg.TestNet3Params
 	TestNetParams.Net = TestnetMagic
