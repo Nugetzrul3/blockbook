@@ -19,6 +19,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/znz"
 	"github.com/trezor/blockbook/bchain/coins/xscr"
 	"github.com/trezor/blockbook/bchain/coins/btg"
+	"github.com/trezor/blockbook/bchain/coins/zdx"
 	"github.com/trezor/blockbook/bchain/coins/funct"
 	"github.com/trezor/blockbook/bchain/coins/trtt"
 	"github.com/trezor/blockbook/bchain/coins/sss"
@@ -133,6 +134,7 @@ func init() {
 	BlockChainFactories["KTS"] = kts.NewPivXRPC
 	BlockChainFactories["TWINS"] = twins.NewPivXRPC
 	BlockChainFactories["XSCR"] = xscr.NewPivXRPC
+	BlockChainFactories["ZDX"] = zdx.NewPivXRPC
 	BlockChainFactories["DOGEC"] = dogec.NewPivXRPC
 	BlockChainFactories["MIDAS"] = midas.NewPivXRPC
 	BlockChainFactories["XSN"] = xsn.NewPivXRPC
