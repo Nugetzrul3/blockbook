@@ -28,6 +28,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/egg"
 	"github.com/trezor/blockbook/bchain/coins/ers"
 	"github.com/trezor/blockbook/bchain/coins/jackpot"
+	"github.com/trezor/blockbook/bchain/coins/kyan"
 	"github.com/trezor/blockbook/bchain/coins/midas"
 	"github.com/trezor/blockbook/bchain/coins/axel"
 	"github.com/trezor/blockbook/bchain/coins/nbx"
@@ -162,6 +163,7 @@ func init() {
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
 	BlockChainFactories["ERS"] = ers.NewPivXRPC
 	BlockChainFactories["ESBC"] = esbc.NewDashRPC
+	BlockChainFactories["KYAN"] = kyan.NewDashRPC
 	BlockChainFactories["SIN"] = sin.NewDashRPC
 	BlockChainFactories["DYN"] = dyn.NewDashRPC
 	BlockChainFactories["CSPN"] = cspn.NewDashRPC
