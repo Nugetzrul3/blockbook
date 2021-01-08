@@ -49,6 +49,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/dogec"
 	"github.com/trezor/blockbook/bchain/coins/dcr"
 	"github.com/trezor/blockbook/bchain/coins/azr"
+	"github.com/trezor/blockbook/bchain/coins/fix"
 	"github.com/trezor/blockbook/bchain/coins/deeponion"
 	"github.com/trezor/blockbook/bchain/coins/digibyte"
 	"github.com/trezor/blockbook/bchain/coins/pny"
@@ -135,6 +136,7 @@ func init() {
 	BlockChainFactories["Groestlcoin Testnet"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["KTS"] = kts.NewPivXRPC
 	BlockChainFactories["TWINS"] = twins.NewPivXRPC
+	BlockChainFactories["FIX"] = fix.NewPivXRPC
 	BlockChainFactories["XSCR"] = xscr.NewPivXRPC
 	BlockChainFactories["ZDX"] = zdx.NewPivXRPC
 	BlockChainFactories["DOGEC"] = dogec.NewPivXRPC
