@@ -21,6 +21,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/xscr"
 	"github.com/trezor/blockbook/bchain/coins/btg"
 	"github.com/trezor/blockbook/bchain/coins/ucr"
+	"github.com/trezor/blockbook/bchain/coins/bare"
 	"github.com/trezor/blockbook/bchain/coins/zdx"
 	"github.com/trezor/blockbook/bchain/coins/funct"
 	"github.com/trezor/blockbook/bchain/coins/trtt"
@@ -156,6 +157,7 @@ func init() {
 	BlockChainFactories["NAV"] = nav.NewDashRPC
 	BlockChainFactories["DMS"] = dms.NewDashRPC
 	BlockChainFactories["SSS"] = sss.NewPivXRPC
+	BlockChainFactories["BARE"] = bare.NewPivXRPC
 	BlockChainFactories["UCR"] = ucr.NewPivXRPC
 	BlockChainFactories["XLQ"] = xlq.NewDashRPC
 	BlockChainFactories["NBX"] = nbx.NewDashRPC
