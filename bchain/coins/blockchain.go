@@ -77,6 +77,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/nuls"
 	"github.com/trezor/blockbook/bchain/coins/omotenashicoin"
 	"github.com/trezor/blockbook/bchain/coins/kts"
+	"github.com/trezor/blockbook/bchain/coins/dashd"
 	"github.com/trezor/blockbook/bchain/coins/ktscs"
 	"github.com/trezor/blockbook/bchain/coins/rpd"
 	"github.com/trezor/blockbook/bchain/coins/sin"
@@ -111,6 +112,7 @@ func init() {
 	BlockChainFactories["Ethereum Testnet Ropsten"] = eth.NewEthereumRPC
 	BlockChainFactories["Bgold"] = btg.NewBGoldRPC
 	BlockChainFactories["Dash"] = dash.NewDashRPC
+	BlockChainFactories["DASHD"] = dashd.NewPivXRPC
 	BlockChainFactories["SCC"] = scc.NewDashRPC
 	BlockChainFactories["CTSC"] = ctsc.NewDashRPC
 	BlockChainFactories["XGS"] = xgs.NewDashRPC
