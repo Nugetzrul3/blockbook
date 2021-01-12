@@ -81,6 +81,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/dashd"
 	"github.com/trezor/blockbook/bchain/coins/ktscs"
 	"github.com/trezor/blockbook/bchain/coins/rpd"
+	"github.com/trezor/blockbook/bchain/coins/bltg"
 	"github.com/trezor/blockbook/bchain/coins/sin"
 	"github.com/trezor/blockbook/bchain/coins/fls"
 	"github.com/trezor/blockbook/bchain/coins/telos"
@@ -139,6 +140,7 @@ func init() {
 	BlockChainFactories["Myriad"] = myriad.NewMyriadRPC
 	BlockChainFactories["Liquid"] = liquid.NewLiquidRPC
 	BlockChainFactories["777"] = jackpot.NewPivXRPC
+	BlockChainFactories["BLTG"] = bltg.NewPivXRPC
 	BlockChainFactories["FUNC"] = funct.NewPivXRPC
 	BlockChainFactories["Groestlcoin"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["Groestlcoin Testnet"] = grs.NewGroestlcoinRPC
