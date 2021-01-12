@@ -95,6 +95,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/vipstarcoin"
 	"github.com/trezor/blockbook/bchain/coins/xzc"
 	"github.com/trezor/blockbook/bchain/coins/zec"
+	"github.com/trezor/blockbook/bchain/coins/stream"
 	"github.com/trezor/blockbook/common"
 )
 
@@ -177,6 +178,7 @@ func init() {
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
 	BlockChainFactories["ERS"] = ers.NewPivXRPC
 	BlockChainFactories["ESBC"] = esbc.NewDashRPC
+	BlockChainFactories["STREAM"] = stream.NewPivXRPC
 	BlockChainFactories["KYAN"] = kyan.NewDashRPC
 	BlockChainFactories["SIN"] = sin.NewDashRPC
 	BlockChainFactories["DYN"] = dyn.NewDashRPC
