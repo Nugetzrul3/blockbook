@@ -159,7 +159,7 @@ func init() {
 	BlockChainFactories["NAV"] = nav.NewDashRPC
 	BlockChainFactories["DMS"] = dms.NewDashRPC
 	BlockChainFactories["SSS"] = sss.NewPivXRPC
-	BlockChainFactories["BARE"] = bare.NewPivXRPC
+	BlockChainFactories["BARE"] = bare.NewDashRPC
 	BlockChainFactories["UCR"] = ucr.NewPivXRPC
 	BlockChainFactories["XLQ"] = xlq.NewDashRPC
 	BlockChainFactories["NBX"] = nbx.NewDashRPC
