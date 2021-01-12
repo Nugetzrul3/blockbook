@@ -86,6 +86,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/telos"
 	"github.com/trezor/blockbook/bchain/coins/polis"
 	"github.com/trezor/blockbook/bchain/coins/qtum"
+	"github.com/trezor/blockbook/bchain/coins/quot"
 	"github.com/trezor/blockbook/bchain/coins/ravencoin"
 	"github.com/trezor/blockbook/bchain/coins/ritocoin"
 	"github.com/trezor/blockbook/bchain/coins/snowgem"
@@ -177,6 +178,7 @@ func init() {
 	BlockChainFactories["PHR"] = phr.NewPivXRPC
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
 	BlockChainFactories["ERS"] = ers.NewPivXRPC
+	BlockChainFactories["QUOT"] = quot.NewPivXRPC
 	BlockChainFactories["ESBC"] = esbc.NewDashRPC
 	BlockChainFactories["STREAM"] = stream.NewPivXRPC
 	BlockChainFactories["KYAN"] = kyan.NewDashRPC
