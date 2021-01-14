@@ -57,6 +57,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/deeponion"
 	"github.com/trezor/blockbook/bchain/coins/digibyte"
 	"github.com/trezor/blockbook/bchain/coins/pny"
+	"github.com/trezor/blockbook/bchain/coins/ccy"
 	"github.com/trezor/blockbook/bchain/coins/sapp"
 	"github.com/trezor/blockbook/bchain/coins/divi"
 	"github.com/trezor/blockbook/bchain/coins/dogecoin"
@@ -174,6 +175,7 @@ func init() {
 	BlockChainFactories["RPD"] = rpd.NewDashRPC
 	BlockChainFactories["SAPP"] = sapp.NewPivXRPC
 	BlockChainFactories["TRTT"] = trtt.NewPivXRPC
+	BlockChainFactories["CCY"] = ccy.NewPivXRPC
 	BlockChainFactories["EGG"] = egg.NewPivXRPC
 	BlockChainFactories["KYD"] = kyd.NewPivXRPC
 	BlockChainFactories["SCM"] = scm.NewPivXRPC

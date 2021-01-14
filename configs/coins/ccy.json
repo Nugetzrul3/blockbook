@@ -1,15 +1,15 @@
 {
   "coin": {
-    "name": "DASHD",
-    "shortcut": "DASHD",
-    "label": "DASHD",
-    "alias": "dashd"
+    "name": "CCY",
+    "shortcut": "CCY",
+    "label": "CCY",
+    "alias": "ccy"
   },
   "ports": {
-    "backend_rpc": 8055,
-    "backend_message_queue": 38346,
-    "blockbook_internal": 9046,
-    "blockbook_public": 9146
+    "backend_rpc": 8060,
+    "backend_message_queue": 38351,
+    "blockbook_internal": 9051,
+    "blockbook_public": 9151
   },
   "ipc": {
     "rpc_url_template": "http://127.0.0.1:{{.Ports.BackendRPC}}",
@@ -19,15 +19,15 @@
     "message_queue_binding_template": "tcp://127.0.0.1:{{.Ports.BackendMessageQueue}}"
   },
   "backend": {
-    "package_name": "backend-dashd",
+    "package_name": "backend-ccy",
     "package_revision": "satoshilabs-1",
-    "system_user": "dashd",
-    "version": "2.0.1",
+    "system_user": "ccy",
+    "version": "1.3.5",
     "binary_url": "http://54.36.62.167/debian/kyd.zip",
     "extract_command": "unzip -d backend",
     "exclude_files": [
     ],
-    "exec_command_template": "{{.Env.BackendInstallPath}}/{{.Coin.Alias}}/dashdiamondd -datadir={{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend -conf={{.Env.BackendInstallPath}}/{{.Coin.Alias}}/{{.Coin.Alias}}.conf -pid=/run/{{.Coin.Alias}}/{{.Coin.Alias}}.pid",
+    "exec_command_template": "{{.Env.BackendInstallPath}}/{{.Coin.Alias}}/cryptocurrencyd -datadir={{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend -conf={{.Env.BackendInstallPath}}/{{.Coin.Alias}}/{{.Coin.Alias}}.conf -pid=/run/{{.Coin.Alias}}/{{.Coin.Alias}}.pid",
     "logrotate_files_template": "{{.Env.BackendDataPath}}/{{.Coin.Alias}}/backend/*.log",
     "postinst_script_template": "",
     "service_type": "forking",
@@ -41,8 +41,8 @@
     }
   },
   "blockbook": {
-    "package_name": "blockbook-dashd",
-    "system_user": "blockbook-dashd",
+    "package_name": "blockbook-ccy",
+    "system_user": "blockbook-ccy",
     "internal_binding_template": ":{{.Ports.BlockbookInternal}}",
     "public_binding_template": ":{{.Ports.BlockbookPublic}}",
     "explorer_url": "",
@@ -56,7 +56,7 @@
       "slip44": 119,
       "additional_params": {
         "fiat_rates": "coingecko",
-        "fiat_rates_params": "{\"url\": \"https://api.coingecko.com/api/v3\", \"coin\": \"dashd\", \"periodSeconds\": 60}"
+        "fiat_rates_params": "{\"url\": \"https://api.coingecko.com/api/v3\", \"coin\": \"ccy\", \"periodSeconds\": 60}"
       }
     }
   },
