@@ -196,7 +196,7 @@ func init() {
 	BlockChainFactories["CSPN"] = cspn.NewDashRPC
 	BlockChainFactories["Polis"] = polis.NewPolisRPC
 	BlockChainFactories["Zcoin"] = xzc.NewZcoinRPC
-	BlockChainFactories["IDX"] = idx.NewZcoinRPC
+	BlockChainFactories["IDX"] = idx.NewDashRPC
 	BlockChainFactories["Fujicoin"] = fujicoin.NewFujicoinRPC
 	BlockChainFactories["Flo"] = flo.NewFloRPC
 	BlockChainFactories["Bellcoin"] = bellcoin.NewBellcoinRPC

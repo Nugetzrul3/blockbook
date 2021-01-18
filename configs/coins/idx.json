@@ -21,7 +21,7 @@
   "backend": {
     "package_name": "backend-idx",
     "package_revision": "satoshilabs-1",
-    "system_user": "lyra",
+    "system_user": "idx",
     "version": "0.13.10.7",
     "binary_url": "http://54.36.62.167/debian/kyd.zip",
     "extract_command": "unzip -d backend",
