@@ -24,6 +24,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/ucr"
 	"github.com/trezor/blockbook/bchain/coins/bare"
 	"github.com/trezor/blockbook/bchain/coins/zdx"
+	"github.com/trezor/blockbook/bchain/coins/lyra"
 	"github.com/trezor/blockbook/bchain/coins/funct"
 	"github.com/trezor/blockbook/bchain/coins/trtt"
 	"github.com/trezor/blockbook/bchain/coins/sss"
@@ -178,6 +179,7 @@ func init() {
 	BlockChainFactories["SAPP"] = sapp.NewPivXRPC
 	BlockChainFactories["TRTT"] = trtt.NewPivXRPC
 	BlockChainFactories["CCY"] = ccy.NewPivXRPC
+	BlockChainFactories["LYRA"] = lyra.NewPivXRPC
 	BlockChainFactories["EGG"] = egg.NewPivXRPC
 	BlockChainFactories["KYD"] = kyd.NewPivXRPC
 	BlockChainFactories["SCM"] = scm.NewPivXRPC
