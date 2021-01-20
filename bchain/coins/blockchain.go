@@ -14,6 +14,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/bellcoin"
 	"github.com/trezor/blockbook/bchain/coins/bitcore"
 	"github.com/trezor/blockbook/bchain/coins/idx"
+	"github.com/trezor/blockbook/bchain/coins/btc2"
 	"github.com/trezor/blockbook/bchain/coins/bitzeny"
 	"github.com/trezor/blockbook/bchain/coins/phr"
 	"github.com/trezor/blockbook/bchain/coins/dms"
@@ -188,6 +189,7 @@ func init() {
 	BlockChainFactories["SCM"] = scm.NewPivXRPC
 	BlockChainFactories["PHR"] = phr.NewPivXRPC
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
+	BlockChainFactories["BTC2"] = btc2.NewPivXRPC
 	BlockChainFactories["ERS"] = ers.NewPivXRPC
 	BlockChainFactories["QUOT"] = quot.NewPivXRPC
 	BlockChainFactories["ESBC"] = esbc.NewDashRPC
