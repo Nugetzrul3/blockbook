@@ -66,6 +66,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/dogecoin"
 	"github.com/trezor/blockbook/bchain/coins/eth"
 	"github.com/trezor/blockbook/bchain/coins/flo"
+	"github.com/trezor/blockbook/bchain/coins/malw"
 	"github.com/trezor/blockbook/bchain/coins/cspn"
 	"github.com/trezor/blockbook/bchain/coins/fujicoin"
 	"github.com/trezor/blockbook/bchain/coins/gamecredits"
@@ -179,6 +180,7 @@ func init() {
 	BlockChainFactories["RPD"] = rpd.NewDashRPC
 	BlockChainFactories["SAPP"] = sapp.NewPivXRPC
 	BlockChainFactories["TRTT"] = trtt.NewPivXRPC
+	BlockChainFactories["MALW"] = malw.NewPivXRPC
 	BlockChainFactories["CCY"] = ccy.NewPivXRPC
 	BlockChainFactories["LYRA"] = lyra.NewPivXRPC
 	BlockChainFactories["EGG"] = egg.NewPivXRPC
