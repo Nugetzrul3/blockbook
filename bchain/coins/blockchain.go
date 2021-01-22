@@ -24,6 +24,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/znz"
 	"github.com/trezor/blockbook/bchain/coins/xscr"
 	"github.com/trezor/blockbook/bchain/coins/btg"
+	"github.com/trezor/blockbook/bchain/coins/kfx"
 	"github.com/trezor/blockbook/bchain/coins/ucr"
 	"github.com/trezor/blockbook/bchain/coins/bare"
 	"github.com/trezor/blockbook/bchain/coins/zdx"
@@ -164,6 +165,7 @@ func init() {
 	BlockChainFactories["KTSCS"] = ktscs.NewPivXRPC
 	BlockChainFactories["AZR"] = azr.NewPivXRPC
 	BlockChainFactories["EZPAY"] = ezpay.NewPivXRPC
+	BlockChainFactories["KFX"] = kfx.NewPivXRPC
 	BlockChainFactories["APR"] = apr.NewDashRPC
 	BlockChainFactories["ESK"] = esk.NewPivXRPC
 	BlockChainFactories["AXEL"] = axel.NewDashRPC
