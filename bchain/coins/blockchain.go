@@ -14,6 +14,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/bellcoin"
 	"github.com/trezor/blockbook/bchain/coins/bitcore"
 	"github.com/trezor/blockbook/bchain/coins/idx"
+	"github.com/trezor/blockbook/bchain/coins/abet"
 	"github.com/trezor/blockbook/bchain/coins/btc2"
 	"github.com/trezor/blockbook/bchain/coins/bitzeny"
 	"github.com/trezor/blockbook/bchain/coins/phr"
@@ -158,6 +159,7 @@ func init() {
 	BlockChainFactories["DOGEC"] = dogec.NewPivXRPC
 	BlockChainFactories["MIDAS"] = midas.NewPivXRPC
 	BlockChainFactories["XSN"] = xsn.NewPivXRPC
+	BlockChainFactories["ABET"] = abet.NewPivXRPC
 	BlockChainFactories["XP"] = xp.NewPivXRPC
 	BlockChainFactories["KTSCS"] = ktscs.NewPivXRPC
 	BlockChainFactories["AZR"] = azr.NewPivXRPC
