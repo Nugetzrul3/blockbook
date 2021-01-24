@@ -84,6 +84,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/myriad"
 	"github.com/trezor/blockbook/bchain/coins/namecoin"
 	"github.com/trezor/blockbook/bchain/coins/nuls"
+	"github.com/trezor/blockbook/bchain/coins/plat"
 	"github.com/trezor/blockbook/bchain/coins/omotenashicoin"
 	"github.com/trezor/blockbook/bchain/coins/kts"
 	"github.com/trezor/blockbook/bchain/coins/dashd"
@@ -126,6 +127,7 @@ func init() {
 	BlockChainFactories["Bgold"] = btg.NewBGoldRPC
 	BlockChainFactories["Dash"] = dash.NewDashRPC
 	BlockChainFactories["DASHD"] = dashd.NewPivXRPC
+	BlockChainFactories["PLAT"] = plat.NewPivXRPC
 	BlockChainFactories["SCC"] = scc.NewDashRPC
 	BlockChainFactories["CTSC"] = ctsc.NewDashRPC
 	BlockChainFactories["XGS"] = xgs.NewDashRPC
