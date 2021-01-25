@@ -53,6 +53,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/nav"
 	"github.com/trezor/blockbook/bchain/coins/esk"
 	"github.com/trezor/blockbook/bchain/coins/ctsc"
+	"github.com/trezor/blockbook/bchain/coins/bir"
 	"github.com/trezor/blockbook/bchain/coins/colx"
 	"github.com/trezor/blockbook/bchain/coins/scc"
 	"github.com/trezor/blockbook/bchain/coins/kyd"
@@ -189,6 +190,7 @@ func init() {
 	BlockChainFactories["RPD"] = rpd.NewDashRPC
 	BlockChainFactories["SAPP"] = sapp.NewPivXRPC
 	BlockChainFactories["TRTT"] = trtt.NewPivXRPC
+	BlockChainFactories["BIR"] = bir.NewPivXRPC
 	BlockChainFactories["MALW"] = malw.NewPivXRPC
 	BlockChainFactories["CCY"] = ccy.NewPivXRPC
 	BlockChainFactories["LYRA"] = lyra.NewPivXRPC
