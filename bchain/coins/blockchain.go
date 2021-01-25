@@ -180,7 +180,7 @@ func init() {
 	BlockChainFactories["PIVX"] = pivx.NewPivXRPC
 	BlockChainFactories["SSS"] = sss.NewPivXRPC
 	BlockChainFactories["BARE"] = bare.NewDashRPC
-	BlockChainFactories["REEX"] = reex.NewPivXRPC
+	BlockChainFactories["REEX"] = reex.NewDashRPC
 	BlockChainFactories["UCR"] = ucr.NewPivXRPC
 	BlockChainFactories["XLQ"] = xlq.NewDashRPC
 	BlockChainFactories["NBX"] = nbx.NewDashRPC
