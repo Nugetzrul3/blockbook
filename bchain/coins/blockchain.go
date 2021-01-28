@@ -97,6 +97,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/bltg"
 	"github.com/trezor/blockbook/bchain/coins/sin"
 	"github.com/trezor/blockbook/bchain/coins/fls"
+	"github.com/trezor/blockbook/bchain/coins/wgr"
 	"github.com/trezor/blockbook/bchain/coins/telos"
 	"github.com/trezor/blockbook/bchain/coins/polis"
 	"github.com/trezor/blockbook/bchain/coins/qtum"
@@ -205,6 +206,7 @@ func init() {
 	BlockChainFactories["KYD"] = kyd.NewPivXRPC
 	BlockChainFactories["SCM"] = scm.NewPivXRPC
 	BlockChainFactories["PHR"] = phr.NewPivXRPC
+	BlockChainFactories["WGR"] = wgr.NewPivXRPC
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
 	BlockChainFactories["BTC2"] = btc2.NewPivXRPC
 	BlockChainFactories["MARC"] = marc.NewPivXRPC
