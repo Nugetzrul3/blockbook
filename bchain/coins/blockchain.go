@@ -63,6 +63,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/dcr"
 	"github.com/trezor/blockbook/bchain/coins/azr"
 	"github.com/trezor/blockbook/bchain/coins/fix"
+	"github.com/trezor/blockbook/bchain/coins/bwi"
 	"github.com/trezor/blockbook/bchain/coins/deeponion"
 	"github.com/trezor/blockbook/bchain/coins/digibyte"
 	"github.com/trezor/blockbook/bchain/coins/pny"
@@ -186,6 +187,7 @@ func init() {
 	BlockChainFactories["SSS"] = sss.NewPivXRPC
 	BlockChainFactories["BARE"] = bare.NewDashRPC
 	BlockChainFactories["REEX"] = reex.NewDashRPC
+	BlockChainFactories["BWI"] = bwi.NewPivXRPC
 	BlockChainFactories["UCR"] = ucr.NewPivXRPC
 	BlockChainFactories["XLQ"] = xlq.NewDashRPC
 	BlockChainFactories["NBX"] = nbx.NewDashRPC
