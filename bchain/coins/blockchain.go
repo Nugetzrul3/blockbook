@@ -95,6 +95,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/cato"
 	"github.com/trezor/blockbook/bchain/coins/ktscs"
 	"github.com/trezor/blockbook/bchain/coins/rpd"
+	"github.com/trezor/blockbook/bchain/coins/ulg"
 	"github.com/trezor/blockbook/bchain/coins/bltg"
 	"github.com/trezor/blockbook/bchain/coins/sin"
 	"github.com/trezor/blockbook/bchain/coins/fls"
@@ -205,6 +206,7 @@ func init() {
 	BlockChainFactories["LYRA"] = lyra.NewPivXRPC
 	BlockChainFactories["LABX"] = labx.NewPivXRPC
 	BlockChainFactories["EGG"] = egg.NewPivXRPC
+	BlockChainFactories["ULG"] = ulg.NewPivXRPC
 	BlockChainFactories["KYD"] = kyd.NewPivXRPC
 	BlockChainFactories["SCM"] = scm.NewPivXRPC
 	BlockChainFactories["PHR"] = phr.NewPivXRPC
