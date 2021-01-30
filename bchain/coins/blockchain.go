@@ -92,6 +92,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/omotenashicoin"
 	"github.com/trezor/blockbook/bchain/coins/kts"
 	"github.com/trezor/blockbook/bchain/coins/dashd"
+	"github.com/trezor/blockbook/bchain/coins/cato"
 	"github.com/trezor/blockbook/bchain/coins/ktscs"
 	"github.com/trezor/blockbook/bchain/coins/rpd"
 	"github.com/trezor/blockbook/bchain/coins/bltg"
@@ -165,6 +166,7 @@ func init() {
 	BlockChainFactories["TWINS"] = twins.NewPivXRPC
 	BlockChainFactories["FIX"] = fix.NewPivXRPC
 	BlockChainFactories["XSCR"] = xscr.NewPivXRPC
+	BlockChainFactories["CATO"] = cato.NewDashRPC
 	BlockChainFactories["ZDX"] = zdx.NewPivXRPC
 	BlockChainFactories["DOGEC"] = dogec.NewPivXRPC
 	BlockChainFactories["MIDAS"] = midas.NewPivXRPC
