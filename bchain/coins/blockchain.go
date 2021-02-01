@@ -213,7 +213,7 @@ func init() {
 	BlockChainFactories["WGR"] = wgr.NewPivXRPC
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
 	BlockChainFactories["BTC2"] = btc2.NewPivXRPC
-	BlockChainFactories["MARC"] = marc.NewPivXRPC
+	BlockChainFactories["MARC"] = marc.NewDashRPC
 	BlockChainFactories["ERS"] = ers.NewPivXRPC
 	BlockChainFactories["QUOT"] = quot.NewPivXRPC
 	BlockChainFactories["ESBC"] = esbc.NewDashRPC
