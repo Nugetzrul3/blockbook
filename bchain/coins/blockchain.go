@@ -73,8 +73,10 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/dogecoin"
 	"github.com/trezor/blockbook/bchain/coins/eth"
 	"github.com/trezor/blockbook/bchain/coins/flo"
+	"github.com/trezor/blockbook/bchain/coins/xdna"
 	"github.com/trezor/blockbook/bchain/coins/malw"
 	"github.com/trezor/blockbook/bchain/coins/cspn"
+	"github.com/trezor/blockbook/bchain/coins/btct"
 	"github.com/trezor/blockbook/bchain/coins/fujicoin"
 	"github.com/trezor/blockbook/bchain/coins/gamecredits"
 	"github.com/trezor/blockbook/bchain/coins/grs"
@@ -88,6 +90,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/myriad"
 	"github.com/trezor/blockbook/bchain/coins/namecoin"
 	"github.com/trezor/blockbook/bchain/coins/nuls"
+	"github.com/trezor/blockbook/bchain/coins/epg"
 	"github.com/trezor/blockbook/bchain/coins/plat"
 	"github.com/trezor/blockbook/bchain/coins/omotenashicoin"
 	"github.com/trezor/blockbook/bchain/coins/kts"
@@ -165,6 +168,7 @@ func init() {
 	BlockChainFactories["Groestlcoin Testnet"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["KTS"] = kts.NewPivXRPC
 	BlockChainFactories["TWINS"] = twins.NewPivXRPC
+	BlockChainFactories["BTCT"] = btct.NewPivXRPC
 	BlockChainFactories["FIX"] = fix.NewPivXRPC
 	BlockChainFactories["XSCR"] = xscr.NewPivXRPC
 	BlockChainFactories["CATO"] = cato.NewDashRPC
@@ -197,9 +201,11 @@ func init() {
 	BlockChainFactories["NBX"] = nbx.NewDashRPC
 	BlockChainFactories["ZNZ"] = znz.NewDashRPC
 	BlockChainFactories["FLS"] = fls.NewPivXRPC
+	BlockChainFactories["EPG"] = epg.NewPivXRPC
 	BlockChainFactories["RPD"] = rpd.NewDashRPC
 	BlockChainFactories["SAPP"] = sapp.NewPivXRPC
 	BlockChainFactories["TRTT"] = trtt.NewPivXRPC
+	BlockChainFactories["XDNA"] = xdna.NewPivXRPC
 	BlockChainFactories["BIR"] = bir.NewPivXRPC
 	BlockChainFactories["MALW"] = malw.NewPivXRPC
 	BlockChainFactories["CCY"] = ccy.NewPivXRPC
