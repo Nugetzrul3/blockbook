@@ -1,4 +1,4 @@
-package marc
+package cfl
 
 import (
 	"bytes"
@@ -18,7 +18,7 @@ import (
 
 // magic numbers
 const (
-	MainnetMagic wire.BitcoinNet = 0x53db11ad
+	MainnetMagic wire.BitcoinNet = 0xcff712a5
 	TestnetMagic wire.BitcoinNet = 0xba657645
 
 	// Zerocoin op codes
@@ -36,9 +36,9 @@ func init() {
 	// PIVX mainnet Address encoding magics
 	MainNetParams = chaincfg.MainNetParams
 	MainNetParams.Net = MainnetMagic
-	MainNetParams.PubKeyHashAddrID = []byte{50} // starting with 'D'
-	MainNetParams.ScriptHashAddrID = []byte{13}
-	MainNetParams.PrivateKeyID = []byte{179}
+	MainNetParams.PubKeyHashAddrID = []byte{87} // starting with 'D'
+	MainNetParams.ScriptHashAddrID = []byte{95}
+	MainNetParams.PrivateKeyID = []byte{102}
 
 	// PIVX testnet Address encoding magics
 	TestNetParams = chaincfg.TestNet3Params

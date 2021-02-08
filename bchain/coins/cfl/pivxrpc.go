@@ -1,4 +1,4 @@
-package marc
+package cfl
 
 import (
 	"encoding/json"

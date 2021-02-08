@@ -31,6 +31,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/labx"
 	"github.com/trezor/blockbook/bchain/coins/zdx"
 	"github.com/trezor/blockbook/bchain/coins/lyra"
+	"github.com/trezor/blockbook/bchain/coins/cfl"
 	"github.com/trezor/blockbook/bchain/coins/funct"
 	"github.com/trezor/blockbook/bchain/coins/trtt"
 	"github.com/trezor/blockbook/bchain/coins/sss"
@@ -168,6 +169,7 @@ func init() {
 	BlockChainFactories["Groestlcoin Testnet"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["KTS"] = kts.NewPivXRPC
 	BlockChainFactories["TWINS"] = twins.NewPivXRPC
+	BlockChainFactories["CFL"] = cfl.NewPivXRPC
 	BlockChainFactories["BTCT"] = btct.NewPivXRPC
 	BlockChainFactories["FIX"] = fix.NewPivXRPC
 	BlockChainFactories["XSCR"] = xscr.NewPivXRPC
