@@ -395,6 +395,7 @@ const (
 	errorInternalTpl
 	indexTpl
 	txTpl
+	shieldTxTpl
 	addressTpl
 	xpubTpl
 	blocksTpl
@@ -436,10 +437,15 @@ func (s *PublicServer) parseTemplates() []*template.Template {
 		"formatTime":               formatTime,
 		"formatUnixTime":           formatUnixTime,
 		"formatAmount":             s.formatAmount,
+		"formatAbsAmount":          s.formatAbsAmount,
+	        "formatNegatedAmount":      s.formatNegatedAmount,
 		"formatAmountWithDecimals": formatAmountWithDecimals,
 		"setTxToTemplateData":      setTxToTemplateData,
 		"isOwnAddress":             isOwnAddress,
 		"isOwnAddresses":           isOwnAddresses,
+		"formatSupply":		    formatSupply,
+		"isShielded":		    IsShielded,
+		"IsPositive":		    IsPositive,
 	}
 	var createTemplate func(filenames ...string) *template.Template
 	if s.debug {
@@ -491,6 +497,7 @@ func (s *PublicServer) parseTemplates() []*template.Template {
 		t[blockTpl] = createTemplate("./static/templates/block.html", "./static/templates/txdetail_ethereumtype.html", "./static/templates/paging.html", "./static/templates/base.html")
 	} else {
 		t[txTpl] = createTemplate("./static/templates/tx.html", "./static/templates/txdetail.html", "./static/templates/base.html")
+		t[shieldTxTpl] = createTemplate("./static/templates/shieldtx.html", "./static/templates/txdetail.html", "./static/templates/base.html")
 		t[addressTpl] = createTemplate("./static/templates/address.html", "./static/templates/txdetail.html", "./static/templates/paging.html", "./static/templates/base.html")
 		t[blockTpl] = createTemplate("./static/templates/block.html", "./static/templates/txdetail.html", "./static/templates/paging.html", "./static/templates/base.html")
 	}
@@ -565,6 +572,9 @@ func (s *PublicServer) explorerTx(w http.ResponseWriter, r *http.Request) (tpl, 
 	}
 	data := s.newTemplateData()
 	data.Tx = tx
+	if IsShielded(tx) {
+        return shieldTxTpl, data, nil
+        }
 	return txTpl, data, nil
 }
 
@@ -1240,3 +1250,91 @@ func (s *PublicServer) apiEstimateFee(r *http.Request, apiVersion int) (interfac
 	}
 	return nil, api.NewAPIError("Missing parameter 'number of blocks'", true)
 }
+
+// format with spaces after thousands and 2 decimals
+// based on https://github.com/icza/gox/blob/master/fmtx/fmtx.go
+func formatSupply(a json.Number) string {
+    x, _ := a.Float64()
+    if x == 0 {
+        return "0.00"
+    }
+    in := strconv.FormatFloat(x, 'f', -1, 64)
+    slices := strings.Split(in, ".")
+    in = slices[0]
+    decimals := ""
+    if len(slices) > 1 {
+        decimals = slices[1][:2]
+    }
+    numOfDigits := len(in)
+    if x < 0 {
+        numOfDigits-- // First character is the - sign (not a digit)
+    }
+    numOfSpaces := (numOfDigits - 1) / 3
+    out := make([]byte, len(in)+numOfSpaces)
+    if x < 0 {
+        in, out[0] = in[1:], '-'
+    }
+    for i, j, k := len(in)-1, len(out)-1, 0; ; i, j = i-1, j-1 {
+        out[j] = in[i]
+        if i == 0 {
+            if len(decimals) == 0 {
+                return string(out)
+            }
+            return fmt.Sprintf("%s.%s", string(out), decimals)
+        }
+        if k++; k == 3 {
+            j, k = j-1, 0
+            out[j] = ' '
+        }
+    }
+}
+
+// getPercent returns the float to 2 decimal places and appends %
+func getPercent(a json.Number, b json.Number) string {
+    x, _ := a.Float64()
+    y, _ := b.Float64()
+        if y == 0 {
+            return "0.00 %"
+        }
+    percent := 100 * x / y
+    return fmt.Sprintf("%.2f %%", percent)
+}
+
+// returns true if shielded transaction
+func IsShielded(tx *api.Tx) bool {
+    if tx.ShieldIns > 0 || tx.ShieldOuts > 0 {
+        return true
+    }
+    return tx.ShieldValBal != nil && !api.IsZeroBigInt((*big.Int)(tx.ShieldValBal))
+}
+
+// format absolute value of amount
+func (s *PublicServer) formatAbsAmount(a *api.Amount) string {
+    if a == nil {
+        return ""
+    }
+    x := (big.Int)(*a)
+    x.Abs(&x)
+    return s.formatAmount((*api.Amount)(&x))
+}
+
+// format the negated value of bigInt
+func (s *PublicServer) formatNegatedAmount(a *api.Amount) string {
+    if a == nil {
+        return ""
+    }
+    x := (big.Int)(*a)
+    x.Neg(&x)
+    return s.formatAmount((*api.Amount)(&x))
+}
+
+// true if a is >= 0
+func IsPositive(a *api.Amount) bool {
+    if a == nil {
+        return true
+    }
+    x := (big.Int)(*a)
+    return x.Sign() >= 0
+}
+
+

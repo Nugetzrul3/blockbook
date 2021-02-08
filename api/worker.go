@@ -244,9 +244,6 @@ func (w *Worker) GetTransactionFromBchainTx(bchainTx *bchain.Tx, height int, spe
 	if w.chainType == bchain.ChainBitcoinType {
 		// for coinbase transactions valIn is 0
 		feesSat.Sub(&valInSat, &valOutSat)
-		if feesSat.Sign() == -1 {
-			feesSat.SetUint64(0)
-		}
 		pValInSat = &valInSat
 	} else if w.chainType == bchain.ChainEthereumType {
 		ets, err := w.chainParser.EthereumTypeGetErc20FromTx(bchainTx)
@@ -280,6 +277,22 @@ func (w *Worker) GetTransactionFromBchainTx(bchainTx *bchain.Tx, height int, spe
 			return nil, err
 		}
 	}
+
+	var tempTx bchain.Tx
+	_ = json.Unmarshal(sj, &tempTx)
+	bchainTx.ShieldValBal = tempTx.ShieldValBal
+	saplingBalance := &bchainTx.ShieldValBal
+	if IsZeroBigInt(saplingBalance) {
+		// only transparent fee
+		saplingBalance = nil
+		if feesSat.Sign() == -1 {
+		feesSat.SetUint64(0)
+	}
+	} else {
+		// add shielded net value to transparent fee
+		feesSat.Add(&feesSat, saplingBalance)
+	}
+
 	// for mempool transaction get first seen time
 	if bchainTx.Confirmations == 0 {
 		bchainTx.Blocktime = int64(w.mempool.GetTransactionTime(bchainTx.Txid))
@@ -294,6 +307,9 @@ func (w *Worker) GetTransactionFromBchainTx(bchainTx *bchain.Tx, height int, spe
 		Txid:             bchainTx.Txid,
 		ValueInSat:       (*Amount)(pValInSat),
 		ValueOutSat:      (*Amount)(&valOutSat),
+		ShieldIns:	  len(tempTx.VShieldIn),
+		ShieldOuts:	  len(tempTx.VShieldOut),
+		ShieldValBal:	  (*Amount)(saplingBalance),
 		Version:          bchainTx.Version,
 		Hex:              bchainTx.Hex,
 		Rbf:              rbf,
@@ -576,6 +592,14 @@ func (w *Worker) txFromTxAddress(txid string, ta *db.TxAddresses, bi *db.BlockIn
 	if feesSat.Sign() == -1 {
 		feesSat.SetUint64(0)
 	}
+	// add shielded net value to fee
+	saplingBalance := &ta.ShieldValBal
+	if IsZeroBigInt(saplingBalance) {
+		saplingBalance = nil
+	} else {
+		feesSat.Add(&feesSat, saplingBalance)
+	}
+
 	r := &Tx{
 		Blockhash:     bi.Hash,
 		Blockheight:   int(ta.Height),
@@ -587,6 +611,9 @@ func (w *Worker) txFromTxAddress(txid string, ta *db.TxAddresses, bi *db.BlockIn
 		ValueOutSat:   (*Amount)(&valOutSat),
 		Vin:           vins,
 		Vout:          vouts,
+		ShieldIns:     int(ta.ShieldIns),
+		ShieldOuts:    int(ta.ShieldOuts),
+		ShieldValBal:  (*Amount)(saplingBalance),
 	}
 	return r
 }
@@ -780,6 +807,10 @@ func (w *Worker) txFromTxid(txid string, bestheight uint32, option AccountDetail
 		tx, err = w.GetTransaction(txid, false, true)
 		if err != nil {
 			return nil, errors.Annotatef(err, "GetTransaction %v", txid)
+		}
+		// Update blocktime
+		if blockInfo != nil {
+			tx.Blocktime = blockInfo.Time
 		}
 	}
 	return tx, nil
@@ -1656,6 +1687,7 @@ func (w *Worker) GetBlock(bid string, page int, txsOnPage int) (*Block, error) {
 			Nonce:         string(bi.Nonce),
 			Txids:         bi.Txids,
 			Version:       bi.Version,
+			SaplingRoot:   bi.SaplingRoot,
 		},
 		TxCount:      txCount,
 		Transactions: txs,
@@ -1765,18 +1797,21 @@ func (w *Worker) GetSystemInfo(internal bool) (*SystemInfo, error) {
 		About:             Text.BlockbookAbout,
 	}
 	backendInfo := &BackendInfo{
-		BackendError:    backendError,
-		BestBlockHash:   ci.Bestblockhash,
-		Blocks:          ci.Blocks,
-		Chain:           ci.Chain,
-		Difficulty:      ci.Difficulty,
-		Headers:         ci.Headers,
-		ProtocolVersion: ci.ProtocolVersion,
-		SizeOnDisk:      ci.SizeOnDisk,
-		Subversion:      ci.Subversion,
-		Timeoffset:      ci.Timeoffset,
-		Version:         ci.Version,
-		Warnings:        ci.Warnings,
+		BackendError:      backendError,
+		BestBlockHash:     ci.Bestblockhash,
+		Blocks:            ci.Blocks,
+		Chain:             ci.Chain,
+		Difficulty:        ci.Difficulty,
+		Headers:           ci.Headers,
+		ProtocolVersion:   ci.ProtocolVersion,
+		SizeOnDisk:        ci.SizeOnDisk,
+		Subversion:        ci.Subversion,
+		Timeoffset:        ci.Timeoffset,
+		Version:           ci.Version,
+		Warnings:          ci.Warnings,
+		TransparentSupply: ci.TransparentSupply,
+		ShieldedSupply:    ci.ShieldedSupply,
+		MoneySupply:	   ci.MoneySupply,
 	}
 	glog.Info("GetSystemInfo finished in ", time.Since(start))
 	return &SystemInfo{blockbookInfo, backendInfo}, nil

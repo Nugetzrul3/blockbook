@@ -75,6 +75,14 @@ type Vout struct {
 	ScriptPubKey ScriptPubKey      `json:"scriptPubKey"`
 }
 
+type VShieldIn struct {
+    Data        json.RawMessage
+}
+
+type VShieldOut struct {
+    Data        json.RawMessage
+}
+
 // Tx is blockchain transaction
 // unnecessary fields are commented out to avoid overhead
 type Tx struct {
@@ -89,7 +97,11 @@ type Tx struct {
 	Confirmations    uint32      `json:"confirmations,omitempty"`
 	Time             int64       `json:"time,omitempty"`
 	Blocktime        int64       `json:"blocktime,omitempty"`
-	CoinSpecificData interface{} `json:"-"`
+	// PIVX Shield
+        VShieldIn        []VShieldIn  `json:"vShieldedSpend,omitempty"`
+        VShieldOut       []VShieldOut `json:"vShieldedOutput,omitempty"`
+        ShieldValBal     big.Int      `json:"valueBalanceSat"`
+	CoinSpecificData interface{}  `json:"-"`
 }
 
 // MempoolVin contains data about tx input
@@ -139,6 +151,7 @@ type BlockInfo struct {
 	Bits       string            `json:"bits"`
 	Difficulty common.JSONNumber `json:"difficulty"`
 	Txids      []string          `json:"tx,omitempty"`
+	SaplingRoot string  	     `json:"finalsaplingroot"`
 }
 
 // MempoolEntry is used to get data about mempool entry
@@ -172,6 +185,11 @@ type ChainInfo struct {
 	ProtocolVersion string  `json:"protocolversion"`
 	Timeoffset      float64 `json:"timeoffset"`
 	Warnings        string  `json:"warnings"`
+	TransparentSupply json.Number `json:"transparentsupply"`
+	ShieldedSupply json.Number `json:"shieldedsupply"`
+	MoneySupply json.Number `json:"moneysupply"`
+	MasternodesCount int	`json:"masternodecount"`
+	NextSuperBlock  int	`json:"masternodecount"`
 }
 
 // RPCError defines rpc error returned by backend

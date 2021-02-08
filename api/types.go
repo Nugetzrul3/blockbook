@@ -193,6 +193,9 @@ type Tx struct {
 	Size             int               `json:"size,omitempty"`
 	ValueOutSat      *Amount           `json:"value"`
 	ValueInSat       *Amount           `json:"valueIn,omitempty"`
+	ShieldIns	 int		   `json:"shieldedIns,omitempty"`
+	ShieldOuts	 int		   `json:"shieldedOuts,omitempty"`
+	ShieldValBal	 *Amount	   `json:"valueBalanceSat,omitempty"`
 	FeesSat          *Amount           `json:"fees,omitempty"`
 	Hex              string            `json:"hex,omitempty"`
 	Rbf              bool              `json:"rbf,omitempty"`
@@ -390,6 +393,7 @@ type BlockInfo struct {
 	Bits          string            `json:"bits"`
 	Difficulty    string            `json:"difficulty"`
 	Txids         []string          `json:"tx,omitempty"`
+	SaplingRoot   string		`json:"finalsaplingroot,omitempty"`
 }
 
 // Block contains information about block
@@ -424,18 +428,23 @@ type BlockbookInfo struct {
 
 // BackendInfo is used to get information about blockchain
 type BackendInfo struct {
-	BackendError    string  `json:"error,omitempty"`
-	Chain           string  `json:"chain,omitempty"`
-	Blocks          int     `json:"blocks,omitempty"`
-	Headers         int     `json:"headers,omitempty"`
-	BestBlockHash   string  `json:"bestBlockHash,omitempty"`
-	Difficulty      string  `json:"difficulty,omitempty"`
-	SizeOnDisk      int64   `json:"sizeOnDisk,omitempty"`
-	Version         string  `json:"version,omitempty"`
-	Subversion      string  `json:"subversion,omitempty"`
-	ProtocolVersion string  `json:"protocolVersion,omitempty"`
-	Timeoffset      float64 `json:"timeOffset,omitempty"`
-	Warnings        string  `json:"warnings,omitempty"`
+	BackendError      string      `json:"error,omitempty"`
+	Chain             string      `json:"chain,omitempty"`
+	Blocks            int         `json:"blocks,omitempty"`
+	Headers           int         `json:"headers,omitempty"`
+	BestBlockHash     string      `json:"bestBlockHash,omitempty"`
+	Difficulty        string      `json:"difficulty,omitempty"`
+	SizeOnDisk        int64       `json:"sizeOnDisk,omitempty"`
+	Version           string      `json:"version,omitempty"`
+	Subversion        string      `json:"subversion,omitempty"`
+	ProtocolVersion   string      `json:"protocolVersion,omitempty"`
+	Timeoffset        float64     `json:"timeOffset,omitempty"`
+	Warnings          string      `json:"warnings,omitempty"`
+	TransparentSupply json.Number `json:"transparentsupply,omitempty"`
+	ShieldedSupply    json.Number `json:"shieldedsupply,omitempty"`
+	MoneySupply	  json.Number `json:"moneysupply,omitempty"`
+	MasternodeCount   int	      `json:"masternodecount,omitempty"`
+	NextSuperBlock	  int	      `json:"masternodecount,omitempty"`
 }
 
 // SystemInfo contains information about the running blockbook and backend instance

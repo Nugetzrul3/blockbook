@@ -535,6 +535,9 @@ type TxAddresses struct {
 	Height  uint32
 	Inputs  []TxInput
 	Outputs []TxOutput
+	ShieldIns uint32
+	ShieldOuts uint32
+	ShieldValBal big.Int
 }
 
 // Utxo holds information about unspent transaction output
@@ -738,89 +741,97 @@ func (d *RocksDB) processAddressesBitcoinType(block *bchain.Block, addresses add
 			}
 		}
 	}
-	// process inputs
-	for txi := range block.Txs {
-		tx := &block.Txs[txi]
-		spendingTxid := blockTxIDs[txi]
-		ta := blockTxAddresses[txi]
-		ta.Inputs = make([]TxInput, len(tx.Vin))
-		logged := false
-		for i, input := range tx.Vin {
-			tai := &ta.Inputs[i]
-			btxID, err := d.chainParser.PackTxid(input.Txid)
-			if err != nil {
-				// do not process inputs without input txid
-				if err == bchain.ErrTxidMissing {
-					continue
-				}
-				return err
-			}
-			stxID := string(btxID)
-			ita, e := txAddressesMap[stxID]
-			if !e {
-				ita, err = d.getTxAddresses(btxID)
-				if err != nil {
-					return err
-				}
-				if ita == nil {
-					// allow parser to process unknown input, some coins may implement special handling, default is to log warning
-					tai.AddrDesc = d.chainParser.GetAddrDescForUnknownInput(tx, i)
-					continue
-				}
-				txAddressesMap[stxID] = ita
-				d.cbs.txAddressesMiss++
-			} else {
-				d.cbs.txAddressesHit++
-			}
-			if len(ita.Outputs) <= int(input.Vout) {
-				glog.Warningf("rocksdb: height %d, tx %v, input tx %v vout %v is out of bounds of stored tx", block.Height, tx.Txid, input.Txid, input.Vout)
-				continue
-			}
-			spentOutput := &ita.Outputs[int(input.Vout)]
-			if spentOutput.Spent {
-				glog.Warningf("rocksdb: height %d, tx %v, input tx %v vout %v is double spend", block.Height, tx.Txid, input.Txid, input.Vout)
-			}
-			tai.AddrDesc = spentOutput.AddrDesc
-			tai.ValueSat = spentOutput.ValueSat
-			// mark the output as spent in tx
-			spentOutput.Spent = true
-			if len(spentOutput.AddrDesc) == 0 {
-				if !logged {
-					glog.V(1).Infof("rocksdb: height %d, tx %v, input tx %v vout %v skipping empty address", block.Height, tx.Txid, input.Txid, input.Vout)
-					logged = true
-				}
-				continue
-			}
-			if d.chainParser.IsAddrDescIndexable(spentOutput.AddrDesc) {
-				strAddrDesc := string(spentOutput.AddrDesc)
-				balance, e := balances[strAddrDesc]
-				if !e {
-					balance, err = d.GetAddrDescBalance(spentOutput.AddrDesc, addressBalanceDetailUTXOIndexed)
-					if err != nil {
-						return err
-					}
-					if balance == nil {
-						balance = &AddrBalance{}
-					}
-					balances[strAddrDesc] = balance
-					d.cbs.balancesMiss++
-				} else {
-					d.cbs.balancesHit++
-				}
-				counted := addToAddressesMap(addresses, strAddrDesc, spendingTxid, ^int32(i))
-				if !counted {
-					balance.Txs++
-				}
-				balance.BalanceSat.Sub(&balance.BalanceSat, &spentOutput.ValueSat)
-				balance.markUtxoAsSpent(btxID, int32(input.Vout))
-				if balance.BalanceSat.Sign() < 0 {
-					d.resetValueSatToZero(&balance.BalanceSat, spentOutput.AddrDesc, "balance")
-				}
-				balance.SentSat.Add(&balance.SentSat, &spentOutput.ValueSat)
-			}
-		}
-	}
-	return nil
+	// process inputs (and sapling Data)
+    for txi := range block.Txs {
+        tx := &block.Txs[txi]
+        spendingTxid := blockTxIDs[txi]
+        ta := blockTxAddresses[txi]
+        ta.Inputs = make([]TxInput, len(tx.Vin))
+        logged := false
+        for i, input := range tx.Vin {
+            tai := &ta.Inputs[i]
+            btxID, err := d.chainParser.PackTxid(input.Txid)
+            if err != nil {
+                // do not process inputs without input txid
+                if err == bchain.ErrTxidMissing {
+                    continue
+                }
+                return err
+            }
+            stxID := string(btxID)
+            ita, e := txAddressesMap[stxID]
+            if !e {
+                ita, err = d.getTxAddresses(btxID)
+                if err != nil {
+                    return err
+                }
+                if ita == nil {
+                    // allow parser to process unknown input, some coins may implement special handling, default is to log warning
+                    tai.AddrDesc = d.chainParser.GetAddrDescForUnknownInput(tx, i)
+//                    tai.ValueSat = *d.chainParser.GetValueSatForUnknownInput(tx, i)
+                    continue
+                }
+                txAddressesMap[stxID] = ita
+                d.cbs.txAddressesMiss++
+            } else {
+                d.cbs.txAddressesHit++
+            }
+            if len(ita.Outputs) <= int(input.Vout) {
+                glog.Warningf("rocksdb: height %d, tx %v, input tx %v vout %v is out of bounds of stored tx", block.Height, tx.Txid, input.Txid, input.Vout)
+                continue
+            }
+            spentOutput := &ita.Outputs[int(input.Vout)]
+            if spentOutput.Spent {
+                glog.Warningf("rocksdb: height %d, tx %v, input tx %v vout %v is double spend", block.Height, tx.Txid, input.Txid, input.Vout)
+            }
+            tai.AddrDesc = spentOutput.AddrDesc
+            tai.ValueSat = spentOutput.ValueSat
+            // mark the output as spent in tx
+            spentOutput.Spent = true
+            if len(spentOutput.AddrDesc) == 0 {
+                if !logged {
+                    glog.V(1).Infof("rocksdb: height %d, tx %v, input tx %v vout %v skipping empty address", block.Height, tx.Txid, input.Txid, input.Vout)
+                    logged = true
+                }
+                continue
+            }
+            vOutputAddrDescriptors := []bchain.AddressDescriptor{spentOutput.AddrDesc}
+            for _, soad := range vOutputAddrDescriptors {
+                if d.chainParser.IsAddrDescIndexable(soad) {
+                    strAddrDesc := string(soad)
+                    balance, e := balances[strAddrDesc]
+                    if !e {
+                        balance, err = d.GetAddrDescBalance(soad, addressBalanceDetailUTXOIndexed)
+                        if err != nil {
+                            return err
+                        }
+                        if balance == nil {
+                            balance = &AddrBalance{}
+                        }
+                        balances[strAddrDesc] = balance
+                        d.cbs.balancesMiss++
+                    } else {
+                        d.cbs.balancesHit++
+                    }
+                    counted := addToAddressesMap(addresses, strAddrDesc, spendingTxid, ^int32(i))
+                    if !counted {
+                        balance.Txs++
+                    }
+                    balance.BalanceSat.Sub(&balance.BalanceSat, &spentOutput.ValueSat)
+                    balance.markUtxoAsSpent(btxID, int32(input.Vout))
+                    if balance.BalanceSat.Sign() < 0 {
+                        d.resetValueSatToZero(&balance.BalanceSat, soad, "balance")
+                    }
+                    balance.SentSat.Add(&balance.SentSat, &spentOutput.ValueSat)
+                }
+            }
+        }
+        // process sapling data
+        ta.ShieldIns = uint32(len(tx.VShieldIn))
+        ta.ShieldOuts = uint32(len(tx.VShieldIn))
+        ta.ShieldValBal = tx.ShieldValBal
+    }
+    return nil
 }
 
 // addToAddressesMap maintains mapping between addresses and transactions in one block
@@ -1049,6 +1060,12 @@ func packTxAddresses(ta *TxAddresses, buf []byte, varBuf []byte) []byte {
 	for i := range ta.Outputs {
 		buf = appendTxOutput(&ta.Outputs[i], buf, varBuf)
 	}
+	l = packVaruint(uint(ta.ShieldIns), varBuf)
+    buf = append(buf, varBuf[:l]...)
+    l = packVaruint(uint(ta.ShieldOuts), varBuf)
+    buf = append(buf, varBuf[:l]...)
+    l = packBigint(&ta.ShieldValBal, varBuf)
+    buf = append(buf, varBuf[:l]...)
 	return buf
 }
 
@@ -1076,42 +1093,42 @@ func appendTxOutput(txo *TxOutput, buf []byte, varBuf []byte) []byte {
 }
 
 func unpackAddrBalance(buf []byte, txidUnpackedLen int, detail AddressBalanceDetail) (*AddrBalance, error) {
-	txs, l := unpackVaruint(buf)
-	sentSat, sl := unpackBigint(buf[l:])
-	balanceSat, bl := unpackBigint(buf[l+sl:])
-	l = l + sl + bl
-	ab := &AddrBalance{
-		Txs:        uint32(txs),
-		SentSat:    sentSat,
-		BalanceSat: balanceSat,
-	}
-	if detail != AddressBalanceDetailNoUTXO {
-		// estimate the size of utxos to avoid reallocation
-		ab.Utxos = make([]Utxo, 0, len(buf[l:])/txidUnpackedLen+3)
-		// ab.utxosMap = make(map[string]int, cap(ab.Utxos))
-		for len(buf[l:]) >= txidUnpackedLen+3 {
-			btxID := append([]byte(nil), buf[l:l+txidUnpackedLen]...)
-			l += txidUnpackedLen
-			vout, ll := unpackVaruint(buf[l:])
-			l += ll
-			height, ll := unpackVaruint(buf[l:])
-			l += ll
-			valueSat, ll := unpackBigint(buf[l:])
-			l += ll
-			u := Utxo{
-				BtxID:    btxID,
-				Vout:     int32(vout),
-				Height:   uint32(height),
-				ValueSat: valueSat,
-			}
-			if detail == AddressBalanceDetailUTXO {
-				ab.Utxos = append(ab.Utxos, u)
-			} else {
-				ab.addUtxo(&u)
-			}
-		}
-	}
-	return ab, nil
+    txs, l := unpackVaruint(buf)
+    sentSat, sl := unpackBigint(buf[l:])
+    balanceSat, bl := unpackBigint(buf[l+sl:])
+    l = l + sl + bl
+    ab := &AddrBalance{
+        Txs:        uint32(txs),
+        SentSat:    sentSat,
+        BalanceSat: balanceSat,
+    }
+    if detail != AddressBalanceDetailNoUTXO {
+        // estimate the size of utxos to avoid reallocation
+        ab.Utxos = make([]Utxo, 0, len(buf[l:])/txidUnpackedLen+3)
+        // ab.utxosMap = make(map[string]int, cap(ab.Utxos))
+        for len(buf[l:]) >= txidUnpackedLen+3 {
+            btxID := append([]byte(nil), buf[l:l+txidUnpackedLen]...)
+            l += txidUnpackedLen
+            vout, ll := unpackVaruint(buf[l:])
+            l += ll
+            height, ll := unpackVaruint(buf[l:])
+            l += ll
+            valueSat, ll := unpackBigint(buf[l:])
+            l += ll
+            u := Utxo{
+                BtxID:    btxID,
+                Vout:     int32(vout),
+                Height:   uint32(height),
+                ValueSat: valueSat,
+            }
+            if detail == AddressBalanceDetailUTXO {
+                ab.Utxos = append(ab.Utxos, u)
+            } else {
+                ab.addUtxo(&u)
+            }
+        }
+    }
+    return ab, nil
 }
 
 func packAddrBalance(ab *AddrBalance, buf, varBuf []byte) []byte {
@@ -1153,6 +1170,13 @@ func unpackTxAddresses(buf []byte) (*TxAddresses, error) {
 	for i := uint(0); i < outputs; i++ {
 		l += unpackTxOutput(&ta.Outputs[i], buf[l:])
 	}
+	shieldinputs, ll := unpackVaruint(buf[l:])
+    l += ll
+    ta.ShieldIns = uint32(shieldinputs)
+    shieldoutputs, ll := unpackVaruint(buf[l:])
+    l += ll
+    ta.ShieldOuts = uint32(shieldoutputs)
+    ta.ShieldValBal, _ = unpackBigint(buf[l:])
 	return &ta, nil
 }
 
