@@ -89,6 +89,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/monacoin"
 	"github.com/trezor/blockbook/bchain/coins/dyn"
 	"github.com/trezor/blockbook/bchain/coins/monetaryunit"
+	"github.com/trezor/blockbook/bchain/coins/modic"
 	"github.com/trezor/blockbook/bchain/coins/myriad"
 	"github.com/trezor/blockbook/bchain/coins/namecoin"
 	"github.com/trezor/blockbook/bchain/coins/nuls"
@@ -224,6 +225,7 @@ func init() {
 	BlockChainFactories["PHR"] = phr.NewPivXRPC
 	BlockChainFactories["WGR"] = wgr.NewPivXRPC
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
+	BlockChainFactories["MODIC"] = modic.NewPivXRPC
 	BlockChainFactories["BTC2"] = btc2.NewPivXRPC
 	BlockChainFactories["MARC"] = marc.NewDashRPC
 	BlockChainFactories["ERS"] = ers.NewPivXRPC
