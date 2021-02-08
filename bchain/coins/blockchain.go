@@ -28,6 +28,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/kfx"
 	"github.com/trezor/blockbook/bchain/coins/ucr"
 	"github.com/trezor/blockbook/bchain/coins/bare"
+	"github.com/trezor/blockbook/bchain/coins/gbx"
 	"github.com/trezor/blockbook/bchain/coins/labx"
 	"github.com/trezor/blockbook/bchain/coins/zdx"
 	"github.com/trezor/blockbook/bchain/coins/lyra"
@@ -91,6 +92,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/myriad"
 	"github.com/trezor/blockbook/bchain/coins/namecoin"
 	"github.com/trezor/blockbook/bchain/coins/nuls"
+	"github.com/trezor/blockbook/bchain/coins/bitg"
 	"github.com/trezor/blockbook/bchain/coins/epg"
 	"github.com/trezor/blockbook/bchain/coins/plat"
 	"github.com/trezor/blockbook/bchain/coins/omotenashicoin"
@@ -138,6 +140,7 @@ func init() {
 	BlockChainFactories["Ethereum Testnet Ropsten"] = eth.NewEthereumRPC
 	BlockChainFactories["Bgold"] = btg.NewBGoldRPC
 	BlockChainFactories["Dash"] = dash.NewDashRPC
+	BlockChainFactories["BITG"] = bitg.NewDashRPC
 	BlockChainFactories["DASHD"] = dashd.NewPivXRPC
 	BlockChainFactories["PLAT"] = plat.NewPivXRPC
 	BlockChainFactories["SCC"] = scc.NewDashRPC
@@ -173,6 +176,7 @@ func init() {
 	BlockChainFactories["BTCT"] = btct.NewPivXRPC
 	BlockChainFactories["FIX"] = fix.NewPivXRPC
 	BlockChainFactories["XSCR"] = xscr.NewPivXRPC
+	BlockChainFactories["GBX"] = gbx.NewDashRPC
 	BlockChainFactories["CATO"] = cato.NewDashRPC
 	BlockChainFactories["ZDX"] = zdx.NewPivXRPC
 	BlockChainFactories["DOGEC"] = dogec.NewPivXRPC
