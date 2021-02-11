@@ -17,6 +17,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/abet"
 	"github.com/trezor/blockbook/bchain/coins/btc2"
 	"github.com/trezor/blockbook/bchain/coins/bitzeny"
+	"github.com/trezor/blockbook/bchain/coins/owo"
 	"github.com/trezor/blockbook/bchain/coins/phr"
 	"github.com/trezor/blockbook/bchain/coins/dms"
 	"github.com/trezor/blockbook/bchain/coins/ezpay"
@@ -167,6 +168,7 @@ func init() {
 	BlockChainFactories["Myriad"] = myriad.NewMyriadRPC
 	BlockChainFactories["Liquid"] = liquid.NewLiquidRPC
 	BlockChainFactories["777"] = jackpot.NewPivXRPC
+	BlockChainFactories["OWO"] = owo.NewPivXRPC
 	BlockChainFactories["BLTG"] = bltg.NewPivXRPC
 	BlockChainFactories["FUNC"] = funct.NewPivXRPC
 	BlockChainFactories["Groestlcoin"] = grs.NewGroestlcoinRPC
