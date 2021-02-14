@@ -72,6 +72,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/pny"
 	"github.com/trezor/blockbook/bchain/coins/ccy"
 	"github.com/trezor/blockbook/bchain/coins/sapp"
+	"github.com/trezor/blockbook/bchain/coins/fyd"
 	"github.com/trezor/blockbook/bchain/coins/divi"
 	"github.com/trezor/blockbook/bchain/coins/dogecoin"
 	"github.com/trezor/blockbook/bchain/coins/eth"
@@ -233,6 +234,7 @@ func init() {
 	BlockChainFactories["ERS"] = ers.NewPivXRPC
 	BlockChainFactories["QUOT"] = quot.NewPivXRPC
 	BlockChainFactories["ESBC"] = esbc.NewDashRPC
+	BlockChainFactories["FYD"] = fyd.NewPivXRPC
 	BlockChainFactories["STREAM"] = stream.NewPivXRPC
 	BlockChainFactories["KYAN"] = kyan.NewDashRPC
 	BlockChainFactories["SIN"] = sin.NewDashRPC
