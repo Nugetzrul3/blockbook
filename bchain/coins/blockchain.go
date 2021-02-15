@@ -77,6 +77,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/dogecoin"
 	"github.com/trezor/blockbook/bchain/coins/eth"
 	"github.com/trezor/blockbook/bchain/coins/flo"
+	"github.com/trezor/blockbook/bchain/coins/fdr"
 	"github.com/trezor/blockbook/bchain/coins/xdna"
 	"github.com/trezor/blockbook/bchain/coins/malw"
 	"github.com/trezor/blockbook/bchain/coins/cspn"
@@ -183,6 +184,7 @@ func init() {
 	BlockChainFactories["GBX"] = gbx.NewDashRPC
 	BlockChainFactories["CATO"] = cato.NewDashRPC
 	BlockChainFactories["ZDX"] = zdx.NewPivXRPC
+	BlockChainFactories["FDR"] = fdr.NewDashRPC
 	BlockChainFactories["DOGEC"] = dogec.NewPivXRPC
 	BlockChainFactories["MIDAS"] = midas.NewPivXRPC
 	BlockChainFactories["XSN"] = xsn.NewPivXRPC
