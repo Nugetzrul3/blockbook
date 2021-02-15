@@ -71,13 +71,16 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/digibyte"
 	"github.com/trezor/blockbook/bchain/coins/pny"
 	"github.com/trezor/blockbook/bchain/coins/ccy"
+	"github.com/trezor/blockbook/bchain/coins/gau"
 	"github.com/trezor/blockbook/bchain/coins/sapp"
 	"github.com/trezor/blockbook/bchain/coins/fyd"
 	"github.com/trezor/blockbook/bchain/coins/divi"
 	"github.com/trezor/blockbook/bchain/coins/dogecoin"
 	"github.com/trezor/blockbook/bchain/coins/eth"
 	"github.com/trezor/blockbook/bchain/coins/flo"
+	"github.com/trezor/blockbook/bchain/coins/scriv"
 	"github.com/trezor/blockbook/bchain/coins/fdr"
+	"github.com/trezor/blockbook/bchain/coins/fln"
 	"github.com/trezor/blockbook/bchain/coins/xdna"
 	"github.com/trezor/blockbook/bchain/coins/malw"
 	"github.com/trezor/blockbook/bchain/coins/cspn"
@@ -194,6 +197,7 @@ func init() {
 	BlockChainFactories["Firo"] = firo.NewFiroRPC
 	BlockChainFactories["AZR"] = azr.NewPivXRPC
 	BlockChainFactories["EZPAY"] = ezpay.NewPivXRPC
+	BlockChainFactories["GAU"] = gau.NewPivXRPC
 	BlockChainFactories["KFX"] = kfx.NewPivXRPC
 	BlockChainFactories["APR"] = apr.NewDashRPC
 	BlockChainFactories["ESK"] = esk.NewPivXRPC
@@ -229,8 +233,10 @@ func init() {
 	BlockChainFactories["SCM"] = scm.NewPivXRPC
 	BlockChainFactories["PHR"] = phr.NewPivXRPC
 	BlockChainFactories["WGR"] = wgr.NewPivXRPC
+	BlockChainFactories["FLN"] = fln.NewPivXRPC
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
 	BlockChainFactories["MODIC"] = modic.NewPivXRPC
+	BlockChainFactories["SCRIV"] = scriv.NewDashRPC
 	BlockChainFactories["BTC2"] = btc2.NewPivXRPC
 	BlockChainFactories["MARC"] = marc.NewDashRPC
 	BlockChainFactories["ERS"] = ers.NewPivXRPC
