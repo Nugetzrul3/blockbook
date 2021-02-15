@@ -70,6 +70,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/deeponion"
 	"github.com/trezor/blockbook/bchain/coins/digibyte"
 	"github.com/trezor/blockbook/bchain/coins/pny"
+	"github.com/trezor/blockbook/bchain/coins/gic"
 	"github.com/trezor/blockbook/bchain/coins/ccy"
 	"github.com/trezor/blockbook/bchain/coins/gau"
 	"github.com/trezor/blockbook/bchain/coins/sapp"
@@ -207,6 +208,7 @@ func init() {
 	BlockChainFactories["SOVE"] = sove.NewPivXRPC
 	BlockChainFactories["COLX"] = colx.NewPivXRPC
 	BlockChainFactories["NAV"] = nav.NewDashRPC
+	BlockChainFactories["GIC"] = gic.NewPivXRPC
 	BlockChainFactories["DMS"] = dms.NewDashRPC
 	BlockChainFactories["PIVX"] = pivx.NewPivXRPC
 	BlockChainFactories["SSS"] = sss.NewPivXRPC
