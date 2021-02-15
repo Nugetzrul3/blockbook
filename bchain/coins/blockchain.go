@@ -74,6 +74,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/ccy"
 	"github.com/trezor/blockbook/bchain/coins/gau"
 	"github.com/trezor/blockbook/bchain/coins/sapp"
+	"github.com/trezor/blockbook/bchain/coins/klks"
 	"github.com/trezor/blockbook/bchain/coins/fyd"
 	"github.com/trezor/blockbook/bchain/coins/divi"
 	"github.com/trezor/blockbook/bchain/coins/dogecoin"
@@ -222,6 +223,7 @@ func init() {
 	BlockChainFactories["FLS"] = fls.NewPivXRPC
 	BlockChainFactories["EPG"] = epg.NewPivXRPC
 	BlockChainFactories["RPD"] = rpd.NewDashRPC
+	BlockChainFactories["KLKS"] = klks.NewDashRPC
 	BlockChainFactories["SAPP"] = sapp.NewPivXRPC
 	BlockChainFactories["TRTT"] = trtt.NewPivXRPC
 	BlockChainFactories["XDNA"] = xdna.NewPivXRPC
