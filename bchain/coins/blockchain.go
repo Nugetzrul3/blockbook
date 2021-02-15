@@ -79,6 +79,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/eth"
 	"github.com/trezor/blockbook/bchain/coins/flo"
 	"github.com/trezor/blockbook/bchain/coins/scriv"
+	"github.com/trezor/blockbook/bchain/coins/scap"
 	"github.com/trezor/blockbook/bchain/coins/fdr"
 	"github.com/trezor/blockbook/bchain/coins/fln"
 	"github.com/trezor/blockbook/bchain/coins/xdna"
@@ -237,6 +238,7 @@ func init() {
 	BlockChainFactories["TELOS"] = telos.NewPivXRPC
 	BlockChainFactories["MODIC"] = modic.NewPivXRPC
 	BlockChainFactories["SCRIV"] = scriv.NewDashRPC
+	BlockChainFactories["SCAP"] = scap.NewDashRPC
 	BlockChainFactories["BTC2"] = btc2.NewPivXRPC
 	BlockChainFactories["MARC"] = marc.NewDashRPC
 	BlockChainFactories["ERS"] = ers.NewPivXRPC
