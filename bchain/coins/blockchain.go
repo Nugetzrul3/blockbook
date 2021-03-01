@@ -27,6 +27,8 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/xscr"
 	"github.com/trezor/blockbook/bchain/coins/btg"
 	"github.com/trezor/blockbook/bchain/coins/kfx"
+	"github.com/trezor/blockbook/bchain/coins/ns"
+	"github.com/trezor/blockbook/bchain/coins/mw"
 	"github.com/trezor/blockbook/bchain/coins/ucr"
 	"github.com/trezor/blockbook/bchain/coins/bare"
 	"github.com/trezor/blockbook/bchain/coins/gbx"
@@ -49,8 +51,10 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/nbx"
 	"github.com/trezor/blockbook/bchain/coins/scm"
 	"github.com/trezor/blockbook/bchain/coins/xlq"
+	"github.com/trezor/blockbook/bchain/coins/essx"
 	"github.com/trezor/blockbook/bchain/coins/xp"
 	"github.com/trezor/blockbook/bchain/coins/sove"
+	"github.com/trezor/blockbook/bchain/coins/send"
 	"github.com/trezor/blockbook/bchain/coins/apr"
 	"github.com/trezor/blockbook/bchain/coins/xsn"
 	"github.com/trezor/blockbook/bchain/coins/cpuchain"
@@ -79,11 +83,15 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/divi"
 	"github.com/trezor/blockbook/bchain/coins/goss"
 	"github.com/trezor/blockbook/bchain/coins/dogecoin"
+	"github.com/trezor/blockbook/bchain/coins/asafe"
 	"github.com/trezor/blockbook/bchain/coins/eth"
 	"github.com/trezor/blockbook/bchain/coins/flo"
 	"github.com/trezor/blockbook/bchain/coins/scriv"
+	"github.com/trezor/blockbook/bchain/coins/remit"
 	"github.com/trezor/blockbook/bchain/coins/scap"
+	"github.com/trezor/blockbook/bchain/coins/smnc"
 	"github.com/trezor/blockbook/bchain/coins/fdr"
+	"github.com/trezor/blockbook/bchain/coins/dev"
 	"github.com/trezor/blockbook/bchain/coins/fln"
 	"github.com/trezor/blockbook/bchain/coins/xdna"
 	"github.com/trezor/blockbook/bchain/coins/malw"
@@ -176,6 +184,7 @@ func init() {
 	BlockChainFactories["DigiByte Testnet"] = digibyte.NewDigiByteRPC
 	BlockChainFactories["Myriad"] = myriad.NewMyriadRPC
 	BlockChainFactories["Liquid"] = liquid.NewLiquidRPC
+	BlockChainFactories["REMIT"] = remit.NewPivXRPC
 	BlockChainFactories["777"] = jackpot.NewPivXRPC
 	BlockChainFactories["OWO"] = owo.NewPivXRPC
 	BlockChainFactories["BLTG"] = bltg.NewPivXRPC
@@ -186,11 +195,14 @@ func init() {
 	BlockChainFactories["TWINS"] = twins.NewPivXRPC
 	BlockChainFactories["CFL"] = cfl.NewPivXRPC
 	BlockChainFactories["BTCT"] = btct.NewPivXRPC
+	BlockChainFactories["ESSX"] = essx.NewDashRPC
 	BlockChainFactories["FIX"] = fix.NewPivXRPC
 	BlockChainFactories["XSCR"] = xscr.NewPivXRPC
 	BlockChainFactories["GBX"] = gbx.NewDashRPC
 	BlockChainFactories["CATO"] = cato.NewDashRPC
 	BlockChainFactories["ZDX"] = zdx.NewPivXRPC
+	BlockChainFactories["NS"] = ns.NewDashRPC
+	BlockChainFactories["MW"] = mw.NewDashRPC
 	BlockChainFactories["FDR"] = fdr.NewDashRPC
 	BlockChainFactories["DOGEC"] = dogec.NewPivXRPC
 	BlockChainFactories["MIDAS"] = midas.NewPivXRPC
@@ -208,6 +220,7 @@ func init() {
 	BlockChainFactories["AXEL"] = axel.NewDashRPC
 	BlockChainFactories["PNY"] = pny.NewPivXRPC
 	BlockChainFactories["SOVE"] = sove.NewPivXRPC
+	BlockChainFactories["SEND"] = send.NewPivXRPC
 	BlockChainFactories["COLX"] = colx.NewPivXRPC
 	BlockChainFactories["NAV"] = nav.NewDashRPC
 	BlockChainFactories["GIC"] = gic.NewPivXRPC
@@ -215,6 +228,7 @@ func init() {
 	BlockChainFactories["PIVX"] = pivx.NewPivXRPC
 	BlockChainFactories["SSS"] = sss.NewPivXRPC
 	BlockChainFactories["BARE"] = bare.NewDashRPC
+	BlockChainFactories["ASAFE"] = asafe.NewPivXRPC
 	BlockChainFactories["REEX"] = reex.NewDashRPC
 	BlockChainFactories["BWI"] = bwi.NewPivXRPC
 	BlockChainFactories["UCR"] = ucr.NewPivXRPC
@@ -224,9 +238,11 @@ func init() {
 	BlockChainFactories["FLS"] = fls.NewPivXRPC
 	BlockChainFactories["EPG"] = epg.NewPivXRPC
 	BlockChainFactories["RPD"] = rpd.NewDashRPC
+	BlockChainFactories["DEV"] = dev.NewPivXRPC
 	BlockChainFactories["KLKS"] = klks.NewDashRPC
-	BlockChainFactories["GOSS"] = goss.NewDashRPC
+	BlockChainFactories["GOSS"] = goss.NewPivXRPC
 	BlockChainFactories["SAPP"] = sapp.NewPivXRPC
+	BlockChainFactories["SMNC"] = smnc.NewPivXRPC
 	BlockChainFactories["TRTT"] = trtt.NewPivXRPC
 	BlockChainFactories["XDNA"] = xdna.NewPivXRPC
 	BlockChainFactories["BIR"] = bir.NewPivXRPC
