@@ -84,12 +84,14 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/goss"
 	"github.com/trezor/blockbook/bchain/coins/dogecoin"
 	"github.com/trezor/blockbook/bchain/coins/asafe"
+	"github.com/trezor/blockbook/bchain/coins/becn"
 	"github.com/trezor/blockbook/bchain/coins/eth"
 	"github.com/trezor/blockbook/bchain/coins/flo"
 	"github.com/trezor/blockbook/bchain/coins/scriv"
 	"github.com/trezor/blockbook/bchain/coins/remit"
 	"github.com/trezor/blockbook/bchain/coins/scap"
 	"github.com/trezor/blockbook/bchain/coins/smnc"
+	"github.com/trezor/blockbook/bchain/coins/iq"
 	"github.com/trezor/blockbook/bchain/coins/fdr"
 	"github.com/trezor/blockbook/bchain/coins/dev"
 	"github.com/trezor/blockbook/bchain/coins/fln"
@@ -102,6 +104,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/grs"
 	"github.com/trezor/blockbook/bchain/coins/koto"
 	"github.com/trezor/blockbook/bchain/coins/liquid"
+	"github.com/trezor/blockbook/bchain/coins/merge"
 	"github.com/trezor/blockbook/bchain/coins/esbc"
 	"github.com/trezor/blockbook/bchain/coins/litecoin"
 	"github.com/trezor/blockbook/bchain/coins/monacoin"
@@ -187,6 +190,7 @@ func init() {
 	BlockChainFactories["REMIT"] = remit.NewPivXRPC
 	BlockChainFactories["777"] = jackpot.NewPivXRPC
 	BlockChainFactories["OWO"] = owo.NewPivXRPC
+	BlockChainFactories["MERGE"] = merge.NewPivXRPC
 	BlockChainFactories["BLTG"] = bltg.NewPivXRPC
 	BlockChainFactories["FUNC"] = funct.NewPivXRPC
 	BlockChainFactories["Groestlcoin"] = grs.NewGroestlcoinRPC
@@ -222,6 +226,7 @@ func init() {
 	BlockChainFactories["SOVE"] = sove.NewPivXRPC
 	BlockChainFactories["SEND"] = send.NewPivXRPC
 	BlockChainFactories["COLX"] = colx.NewPivXRPC
+	BlockChainFactories["BECN"] = becn.NewPivXRPC
 	BlockChainFactories["NAV"] = nav.NewDashRPC
 	BlockChainFactories["GIC"] = gic.NewPivXRPC
 	BlockChainFactories["DMS"] = dms.NewDashRPC
@@ -277,6 +282,7 @@ func init() {
 	BlockChainFactories["IDX"] = idx.NewDashRPC
 	BlockChainFactories["Fujicoin"] = fujicoin.NewFujicoinRPC
 	BlockChainFactories["Flo"] = flo.NewFloRPC
+	BlockChainFactories["IQ"] = iq.NewDashRPC
 	BlockChainFactories["Bellcoin"] = bellcoin.NewBellcoinRPC
 	BlockChainFactories["Qtum"] = qtum.NewQtumRPC
 	BlockChainFactories["Viacoin"] = viacoin.NewViacoinRPC
