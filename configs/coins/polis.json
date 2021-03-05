@@ -6,15 +6,15 @@
     "alias": "polis"
   },
   "ports": {
-    "backend_rpc": 8067,
-    "backend_message_queue": 38367,
-    "blockbook_internal": 9067,
-    "blockbook_public": 9167
+    "backend_rpc": 8106,
+    "backend_message_queue": 38397,
+    "blockbook_internal": 9097,
+    "blockbook_public": 9197
   },
   "ipc": {
     "rpc_url_template": "http://127.0.0.1:{{.Ports.BackendRPC}}",
     "rpc_user": "rpc",
-    "rpc_pass": "rpc",
+    "rpc_pass": "polisrpc",
     "rpc_timeout": 25,
     "message_queue_binding_template": "tcp://127.0.0.1:{{.Ports.BackendMessageQueue}}"
   },
@@ -22,10 +22,8 @@
     "package_name": "backend-polis",
     "package_revision": "satoshilabs-1",
     "system_user": "polis",
-    "version": "1.4.18",
-    "binary_url": "https://github.com/polispay/polis/releases/download/v1.4.18/poliscore-1.4.18-x86_64-linux-gnu.tar.gz",
-    "verification_type": "sha256",
-    "verification_source": "00b8c760a195209e9f1b10062fbff46f941f56444afc86fffebcfd127b2a6a50",
+    "version": "1.7.0",
+    "binary_url": "https://github.com/polispay/polis/releases/download/v1.7.0/poliscore-1.7.0-x86_64-linux-gnu.tar.gz",
     "extract_command": "tar -C backend --strip 1 -xf",
     "exclude_files": [
       "bin/polis-qt"
