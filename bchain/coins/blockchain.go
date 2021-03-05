@@ -190,7 +190,7 @@ func init() {
 	BlockChainFactories["Liquid"] = liquid.NewLiquidRPC
 	BlockChainFactories["REMIT"] = remit.NewPivXRPC
 	BlockChainFactories["777"] = jackpot.NewPivXRPC
-	BlockChainFactories["CARI"] = cari.NewPivXRPC
+	BlockChainFactories["CARI"] = cari.NewDashRPC
 	BlockChainFactories["OWO"] = owo.NewPivXRPC
 	BlockChainFactories["MERGE"] = merge.NewPivXRPC
 	BlockChainFactories["BLTG"] = bltg.NewPivXRPC
