@@ -28,6 +28,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/btg"
 	"github.com/trezor/blockbook/bchain/coins/kfx"
 	"github.com/trezor/blockbook/bchain/coins/ns"
+	"github.com/trezor/blockbook/bchain/coins/cari"
 	"github.com/trezor/blockbook/bchain/coins/mw"
 	"github.com/trezor/blockbook/bchain/coins/ucr"
 	"github.com/trezor/blockbook/bchain/coins/bare"
@@ -189,6 +190,7 @@ func init() {
 	BlockChainFactories["Liquid"] = liquid.NewLiquidRPC
 	BlockChainFactories["REMIT"] = remit.NewPivXRPC
 	BlockChainFactories["777"] = jackpot.NewPivXRPC
+	BlockChainFactories["CARI"] = cari.NewPivXRPC
 	BlockChainFactories["OWO"] = owo.NewPivXRPC
 	BlockChainFactories["MERGE"] = merge.NewPivXRPC
 	BlockChainFactories["BLTG"] = bltg.NewPivXRPC
