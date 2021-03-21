@@ -29,6 +29,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/kfx"
 	"github.com/trezor/blockbook/bchain/coins/ns"
 	"github.com/trezor/blockbook/bchain/coins/cari"
+	"github.com/trezor/blockbook/bchain/coins/gtc"
 	"github.com/trezor/blockbook/bchain/coins/mw"
 	"github.com/trezor/blockbook/bchain/coins/ucr"
 	"github.com/trezor/blockbook/bchain/coins/bare"
@@ -193,6 +194,7 @@ func init() {
 	BlockChainFactories["CARI"] = cari.NewDashRPC
 	BlockChainFactories["OWO"] = owo.NewPivXRPC
 	BlockChainFactories["MERGE"] = merge.NewPivXRPC
+	BlockChainFactories["GTC"] = gtc.NewPivXRPC
 	BlockChainFactories["BLTG"] = bltg.NewPivXRPC
 	BlockChainFactories["FUNC"] = funct.NewPivXRPC
 	BlockChainFactories["Groestlcoin"] = grs.NewGroestlcoinRPC
