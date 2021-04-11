@@ -300,6 +300,18 @@ func (p *BaseParser) EthereumTypeGetErc20FromTx(tx *Tx) ([]Erc20Transfer, error)
 	return nil, errors.New("Not supported")
 }
 
+func (p *BaseParser) EthereumTypeGetCreateContractTransferFromTx(tx *Tx) ([]Erc20Transfer, error) {
+	return nil, errors.New("Not supported")
+}
+
+func (p *BaseParser) EthereumTypeIsCreateContractTx(tx *Tx) bool  {
+	return false
+}
+
+func (p *BaseParser) BscTypeGetBEP20FromTx(tx *Tx, thub *Tokenhub) ([]Erc20Transfer, error) {
+	return nil, errors.New("Not supported")
+}
+
 // Pivx Additions
 // GetValueSatForUnknownInput returns 0
 func (p *BaseParser) GetValueSatForUnknownInput(tx *Tx, input int) *big.Int {
