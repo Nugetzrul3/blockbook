@@ -16,7 +16,6 @@ import (
 	"github.com/juju/errors"
 	"github.com/trezor/blockbook/bchain"
 	"github.com/trezor/blockbook/bchain/coins/eth"
-	"github.com/trezor/blockbook/bchain/coins/bsc"
 	"github.com/trezor/blockbook/common"
 	"github.com/trezor/blockbook/db"
 )
@@ -209,7 +208,7 @@ func (w *Worker) GetTransactionFromBchainTx(bchainTx *bchain.Tx, height int, spe
 					valInSat.Add(&valInSat, (*big.Int)(vin.ValueSat))
 				}
 			}
-		} else if w.chainType == bchain.ChainEthereumType || w.chainType == bchain.ChainBscType {
+		} else if w.chainType == bchain.ChainEthereumType {
 			if len(bchainVin.Addresses) > 0 {
 				vin.AddrDesc, err = w.chainParser.GetAddrDescFromAddress(bchainVin.Addresses[0])
 				if err != nil {
@@ -253,33 +252,6 @@ func (w *Worker) GetTransactionFromBchainTx(bchainTx *bchain.Tx, height int, spe
 		}
 		tokens = w.getTokensFromErc20(ets)
 		ethTxData := eth.GetEthereumTxData(bchainTx)
-		// mempool txs do not have fees yet
-		if ethTxData.GasUsed != nil {
-			feesSat.Mul(ethTxData.GasPrice, ethTxData.GasUsed)
-		}
-		if len(bchainTx.Vout) > 0 {
-			valOutSat = bchainTx.Vout[0].ValueSat
-		}
-		ethSpecific = &EthereumSpecific{
-			GasLimit: ethTxData.GasLimit,
-			GasPrice: (*Amount)(ethTxData.GasPrice),
-			GasUsed:  ethTxData.GasUsed,
-			Nonce:    ethTxData.Nonce,
-			Status:   ethTxData.Status,
-			Data:     ethTxData.Data,
-		}
-	} else if w.chainType == bchain.ChainBscType {
-		//ets, err := w.chainParser.EthereumTypeGetErc20FromTx(bchainTx)
-		th, err := w.chain.BscTypeGetTokenHub()
-		if err != nil {
-			glog.Error(err)
-		}
-		ets, err := w.chainParser.BscTypeGetBEP20FromTx(bchainTx, th)
-		if err != nil {
-			glog.Errorf("GetErc20FromTx error %v, %v", err, bchainTx)
-		}
-		tokens = w.getTokensFromErc20(ets)
-		ethTxData := bsc.GetEthereumTxData(bchainTx)
 		// mempool txs do not have fees yet
 		if ethTxData.GasUsed != nil {
 			feesSat.Mul(ethTxData.GasPrice, ethTxData.GasUsed)
@@ -384,7 +356,7 @@ func (w *Worker) GetTransactionFromMempoolTx(mempoolTx *bchain.MempoolTx) (*Tx, 
 					valInSat.Add(&valInSat, (*big.Int)(vin.ValueSat))
 				}
 			}
-		} else if w.chainType == bchain.ChainEthereumType || w.chainType == bchain.ChainBscType {
+		} else if w.chainType == bchain.ChainEthereumType {
 			if len(bchainVin.Addresses) > 0 {
 				vin.AddrDesc, err = w.chainParser.GetAddrDescFromAddress(bchainVin.Addresses[0])
 				if err != nil {
@@ -421,20 +393,6 @@ func (w *Worker) GetTransactionFromMempoolTx(mempoolTx *bchain.MempoolTx) (*Tx, 
 		}
 		tokens = w.getTokensFromErc20(mempoolTx.Erc20)
 		ethTxData := eth.GetEthereumTxDataFromSpecificData(mempoolTx.CoinSpecificData)
-		ethSpecific = &EthereumSpecific{
-			GasLimit: ethTxData.GasLimit,
-			GasPrice: (*Amount)(ethTxData.GasPrice),
-			GasUsed:  ethTxData.GasUsed,
-			Nonce:    ethTxData.Nonce,
-			Status:   ethTxData.Status,
-			Data:     ethTxData.Data,
-		}
-	} else if w.chainType == bchain.ChainBscType {
-		if len(mempoolTx.Vout) > 0 {
-			valOutSat = mempoolTx.Vout[0].ValueSat
-		}
-		tokens = w.getTokensFromErc20(mempoolTx.Erc20)
-		ethTxData := bsc.GetEthereumTxDataFromSpecificData(mempoolTx.CoinSpecificData)
 		ethSpecific = &EthereumSpecific{
 			GasLimit: ethTxData.GasLimit,
 			GasPrice: (*Amount)(ethTxData.GasPrice),
@@ -719,25 +677,6 @@ func (w *Worker) getEthereumToken(index int, addrDesc, contract bchain.AddressDe
 	}, nil
 }
 
-func (w *Worker) GetEthereumTypeErc20TokenList() ([]*bchain.Erc20Contract, error) {
-	contracts := w.db.GetErc20Contract()
-	tokens := make([]*bchain.Erc20Contract, 0)
-	for _, contract := range contracts {
-		addr, err := w.chainParser.GetAddrDescFromAddress(contract)
-		if err != nil {
-			return nil, fmt.Errorf("fail to parse address %s", contract)
-		}
-		info, err := w.chain.EthereumTypeGetErc20ContractInfo(addr)
-		if err != nil {
-			return nil, fmt.Errorf("fail to get %s info", contract)
-		}
-		if info != nil {
-			tokens = append(tokens, info)
-		}
-	}
-	return tokens, nil
-}
-
 func (w *Worker) getEthereumTypeAddressBalances(addrDesc bchain.AddressDescriptor, details AccountDetails, filter *AddressFilter) (*db.AddrBalance, []Token, *bchain.Erc20Contract, uint64, int, int, error) {
 	var (
 		ba             *db.AddrBalance
@@ -900,7 +839,6 @@ func (w *Worker) getAddrDescAndNormalizeAddress(address string) (bchain.AddressD
 
 // GetAddress computes address value and gets transactions for given address
 func (w *Worker) GetAddress(address string, page int, txsOnPage int, option AccountDetails, filter *AddressFilter) (*Address, error) {
-	glog.Info(option)
 	start := time.Now()
 	page--
 	if page < 0 {
@@ -925,7 +863,7 @@ func (w *Worker) GetAddress(address string, page int, txsOnPage int, option Acco
 	if err != nil {
 		return nil, err
 	}
-	if w.chainType == bchain.ChainEthereumType || w.chainType == bchain.ChainBscType {
+	if w.chainType == bchain.ChainEthereumType {
 		var n uint64
 		ba, tokens, erc20c, n, nonTokenTxs, totalResults, err = w.getEthereumTypeAddressBalances(addrDesc, option, filter)
 		if err != nil {
@@ -969,7 +907,7 @@ func (w *Worker) GetAddress(address string, page int, txsOnPage int, option Acco
 					unconfirmedTxs++
 					uBalSat.Add(&uBalSat, tx.getAddrVoutValue(addrDesc))
 					// ethereum has a different logic - value not in input and add maximum possible fees
-					if w.chainType == bchain.ChainEthereumType || w.chainType == bchain.ChainBscType {
+					if w.chainType == bchain.ChainEthereumType {
 						uBalSat.Sub(&uBalSat, tx.getAddrEthereumTypeMempoolInputValue(addrDesc))
 					} else {
 						uBalSat.Sub(&uBalSat, tx.getAddrVinValue(addrDesc))
@@ -1073,7 +1011,7 @@ func (w *Worker) balanceHistoryForTxid(addrDesc bchain.AddressDescriptor, txid s
 			return nil, nil
 		}
 		height = ta.Height
-	} else if w.chainType == bchain.ChainEthereumType || w.chainType == bchain.ChainBscType {
+	} else if w.chainType == bchain.ChainEthereumType {
 		var h int
 		bchainTx, h, err = w.txCache.GetTransaction(txid)
 		if err != nil {
@@ -1127,7 +1065,7 @@ func (w *Worker) balanceHistoryForTxid(addrDesc bchain.AddressDescriptor, txid s
 				}
 			}
 		}
-	} else if w.chainType == bchain.ChainEthereumType || w.chainType == bchain.ChainBscType {
+	} else if w.chainType == bchain.ChainEthereumType {
 		var value big.Int
 		ethTxData := eth.GetEthereumTxData(bchainTx)
 		// add received amount only for OK or unknown status (old) transactions
