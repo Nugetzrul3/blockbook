@@ -18,6 +18,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/btc2"
 	"github.com/trezor/blockbook/bchain/coins/bitzeny"
 	"github.com/trezor/blockbook/bchain/coins/owo"
+	"github.com/trezor/blockbook/bchain/coins/mnme"
 	"github.com/trezor/blockbook/bchain/coins/phr"
 	"github.com/trezor/blockbook/bchain/coins/dms"
 	"github.com/trezor/blockbook/bchain/coins/ezpay"
@@ -169,6 +170,7 @@ func init() {
 	BlockChainFactories["DASHD"] = dashd.NewPivXRPC
 	BlockChainFactories["PLAT"] = plat.NewPivXRPC
 	BlockChainFactories["SCC"] = scc.NewDashRPC
+	BlockChainFactories["MNME"] = mnme.NewPivXRPC
 	BlockChainFactories["CTSC"] = ctsc.NewDashRPC
 	BlockChainFactories["XGS"] = xgs.NewDashRPC
 	BlockChainFactories["Dash Testnet"] = dash.NewDashRPC
