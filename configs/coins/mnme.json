@@ -6,10 +6,10 @@
     "alias": "mnme"
   },
   "ports": {
-    "backend_rpc": 8107,
-    "backend_message_queue": 38397,
-    "blockbook_internal": 9098,
-    "blockbook_public": 9197
+    "backend_rpc": 8108,
+    "backend_message_queue": 38398,
+    "blockbook_internal": 9099,
+    "blockbook_public": 9199
   },
   "ipc": {
     "rpc_url_template": "http://127.0.0.1:{{.Ports.BackendRPC}}",
