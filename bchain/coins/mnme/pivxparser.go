@@ -1,4 +1,4 @@
-package azr
+package mnme
 
 import (
 	"bytes"
