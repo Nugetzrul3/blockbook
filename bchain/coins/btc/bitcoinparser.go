@@ -251,9 +251,9 @@ func (p *BitcoinParser) TxFromMsgTx(t *wire.MsgTx, parseAddresses bool) bchain.T
 		}
 		var vs big.Int
 		vs.SetInt64(out.Value)
-		if(t.Time < 1620290400) {
+		/*if(t.Time < 1620290400) {
 			vs.SetInt64(out.Value / 1000)
-		}
+		}*/
 		vout[i] = bchain.Vout{
 			ValueSat:     vs,
 			N:            uint32(i),
