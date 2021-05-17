@@ -17,6 +17,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/abet"
 	"github.com/trezor/blockbook/bchain/coins/btc2"
 	"github.com/trezor/blockbook/bchain/coins/bitzeny"
+	"github.com/trezor/blockbook/bchain/coins/saga"
 	"github.com/trezor/blockbook/bchain/coins/owo"
 	"github.com/trezor/blockbook/bchain/coins/mnme"
 	"github.com/trezor/blockbook/bchain/coins/phr"
@@ -168,6 +169,7 @@ func init() {
 	BlockChainFactories["Dash"] = dash.NewDashRPC
 	BlockChainFactories["BITG"] = bitg.NewDashRPC
 	BlockChainFactories["DASHD"] = dashd.NewPivXRPC
+	BlockChainFactories["SAGA"] = saga.NewPivXRPC
 	BlockChainFactories["PLAT"] = plat.NewPivXRPC
 	BlockChainFactories["SCC"] = scc.NewDashRPC
 	BlockChainFactories["MNME"] = mnme.NewPivXRPC
