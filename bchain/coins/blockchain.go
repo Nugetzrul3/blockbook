@@ -18,6 +18,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/btc2"
 	"github.com/trezor/blockbook/bchain/coins/bitzeny"
 	"github.com/trezor/blockbook/bchain/coins/saga"
+	"github.com/trezor/blockbook/bchain/coins/deq"
 	"github.com/trezor/blockbook/bchain/coins/owo"
 	"github.com/trezor/blockbook/bchain/coins/mnme"
 	"github.com/trezor/blockbook/bchain/coins/phr"
@@ -200,6 +201,7 @@ func init() {
 	BlockChainFactories["CARI"] = cari.NewDashRPC
 	BlockChainFactories["OWO"] = owo.NewPivXRPC
 	BlockChainFactories["MERGE"] = merge.NewPivXRPC
+	BlockChainFactories["DEQ"] = deq.NewPivXRPC
 	BlockChainFactories["GTC"] = gtc.NewPivXRPC
 	BlockChainFactories["BLTG"] = bltg.NewPivXRPC
 	BlockChainFactories["FUNC"] = funct.NewPivXRPC
