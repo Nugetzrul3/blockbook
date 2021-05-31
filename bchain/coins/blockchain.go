@@ -17,6 +17,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/abet"
 	"github.com/trezor/blockbook/bchain/coins/btc2"
 	"github.com/trezor/blockbook/bchain/coins/bitzeny"
+	"github.com/trezor/blockbook/bchain/coins/pfzer"
 	"github.com/trezor/blockbook/bchain/coins/saga"
 	"github.com/trezor/blockbook/bchain/coins/deq"
 	"github.com/trezor/blockbook/bchain/coins/owo"
@@ -209,6 +210,7 @@ func init() {
 	BlockChainFactories["Groestlcoin Testnet"] = grs.NewGroestlcoinRPC
 	BlockChainFactories["KTS"] = kts.NewPivXRPC
 	BlockChainFactories["TWINS"] = twins.NewPivXRPC
+	BlockChainFactories["PFZER"] = pfzer.NewPivXRPC
 	BlockChainFactories["CFL"] = cfl.NewPivXRPC
 	BlockChainFactories["BTCT"] = btct.NewPivXRPC
 	BlockChainFactories["ESSX"] = essx.NewDashRPC
