@@ -236,7 +236,7 @@ func init() {
 	BlockChainFactories["AXEL"] = axel.NewDashRPC
 	BlockChainFactories["PNY"] = pny.NewPivXRPC
 	BlockChainFactories["SOVE"] = sove.NewPivXRPC
-	BlockChainFactories["SEND"] = send.NewPivXRPC
+	BlockChainFactories["SEND"] = send.NewDashRPC
 	BlockChainFactories["COLX"] = colx.NewPivXRPC
 	BlockChainFactories["BECN"] = becn.NewPivXRPC
 	BlockChainFactories["NAV"] = nav.NewDashRPC
