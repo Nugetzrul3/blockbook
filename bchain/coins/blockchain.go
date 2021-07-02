@@ -22,6 +22,7 @@ import (
 	"github.com/trezor/blockbook/bchain/coins/deq"
 	"github.com/trezor/blockbook/bchain/coins/owo"
 	"github.com/trezor/blockbook/bchain/coins/mnme"
+	"github.com/trezor/blockbook/bchain/coins/mhce"
 	"github.com/trezor/blockbook/bchain/coins/phr"
 	"github.com/trezor/blockbook/bchain/coins/dms"
 	"github.com/trezor/blockbook/bchain/coins/ezpay"
@@ -176,6 +177,7 @@ func init() {
 	BlockChainFactories["SCC"] = scc.NewDashRPC
 	BlockChainFactories["MNME"] = mnme.NewPivXRPC
 	BlockChainFactories["CTSC"] = ctsc.NewDashRPC
+	BlockChainFactories["MHCE"] = mhce.NewPivXRPC
 	BlockChainFactories["XGS"] = xgs.NewDashRPC
 	BlockChainFactories["Dash Testnet"] = dash.NewDashRPC
 	BlockChainFactories["Decred"] = dcr.NewDecredRPC
